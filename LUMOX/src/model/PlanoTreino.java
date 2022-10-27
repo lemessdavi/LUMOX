@@ -2,15 +2,16 @@ package model;
 
 import java.util.ArrayList;
 
-public class PlanoSemanal {
+public class PlanoTreino {
+	
 	private int id;
 	private String nome;
-	private ArrayList<DiaDaSemana> semana;
+	private ArrayList<Exercicio> treino;
 	
-	public PlanoSemanal(String nome, ArrayList<DiaDaSemana> semana) {
+	public PlanoTreino(String nome, ArrayList<Exercicio> treino) {
 		super();
 		this.nome = nome;
-		this.semana = semana;
+		this.treino = treino;
 	}
 
 	public int getId() {
@@ -29,13 +30,16 @@ public class PlanoSemanal {
 		this.nome = nome;
 	}
 
-	public ArrayList<DiaDaSemana> getSemana() {
-		return semana;
+	public ArrayList<Exercicio> getTreino() {
+		return treino;
 	}
 
-	public void setSemana(ArrayList<DiaDaSemana> semana) {
-		this.semana = semana;
+	public void setTreino(ArrayList<Exercicio> treino) {
+		this.treino = treino;
 	}
+	
+	
+	
 	
 	
 }
