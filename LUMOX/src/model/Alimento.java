@@ -1,7 +1,7 @@
 package model;
 
 public class Alimento {
-	private int id;
+	private long id;
 	private String nome;
 	private int calorias;
 	private String propriedades;
@@ -14,11 +14,11 @@ public class Alimento {
 	}
 	
 	
-	public int getId() {
+	public long getId() {
 		return id;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setId(long l) {
+		this.id = l;
 	}
 	public String getNome() {
 		return nome;

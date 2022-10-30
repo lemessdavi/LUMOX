@@ -6,4 +6,5 @@
  *
  */
 module LUMOX {
+	requires java.sql;
 }
