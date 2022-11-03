@@ -2,11 +2,11 @@ package model;
 
 public class DiaDaSemana {
 	private int id;
-	private int dia;
+	private String dia;
 	private PlanoAlimentar planoAlimentar;
 	private PlanoTreino planoTreino;
 	
-	public DiaDaSemana(int dia, PlanoAlimentar planoAlimentar, PlanoTreino planoTreino) {
+	public DiaDaSemana(String dia, PlanoAlimentar planoAlimentar, PlanoTreino planoTreino) {
 		super();
 		this.dia = dia;
 		this.planoAlimentar = planoAlimentar;
@@ -21,11 +21,11 @@ public class DiaDaSemana {
 		this.id = id;
 	}
 
-	public int getDia() {
+	public String getDia() {
 		return dia;
 	}
 
-	public void setDia(int dia) {
+	public void setDia(String dia) {
 		this.dia = dia;
 	}
 
