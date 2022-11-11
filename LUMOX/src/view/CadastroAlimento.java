@@ -91,7 +91,8 @@ public class CadastroAlimento extends JFrame {
 					telaErro.show(true);
 					}
 				} catch (NumberFormatException | SQLException e1) {
-					e1.printStackTrace();
+					PopUp telaErro = new PopUp("Erro, Cadastro Não Realizado");
+					telaErro.show(true);
 				}
 			}
 		});
