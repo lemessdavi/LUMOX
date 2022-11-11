@@ -6,17 +6,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import model.Atleta;
-import model.Avaliacao;
+import model.Personal;
+import model.PlanoAlimentar;
 
-public class AvaliacaoDAO {
+public class PlanoAlimentarDAO {
 
-	public long insertAvaliacao(Avaliacao avaliacao, Atleta atelta) throws SQLException {
+	public long insertPlanoAlimentar(PlanoAlimentar plano, Personal personal) throws SQLException {
 		ConnectionFactory cFactory = new ConnectionFactory();
 		Connection connection = cFactory.recuperarConexao();
 		
-		String  SQL = "insert into avaliacao (avaliacaodescricao, avaliacaoatleta)"
-				+ "values  (?, ?)";
+		String  SQL = "insert into planoalimentar (planoalimentarnome, planoalimentarpersonal) "
+				+ "values  (?,?)" ;
 		
         long id = 0;
 
@@ -24,8 +24,9 @@ public class AvaliacaoDAO {
                 PreparedStatement pstmt = connection.prepareStatement(SQL,
                 Statement.RETURN_GENERATED_KEYS)) {
 
-            pstmt.setString(1, avaliacao.getAvaliacao());
-            pstmt.setLong(2, atelta.getId());
+            pstmt.setString(1, plano.getNome());
+            pstmt.setLong(2, personal.getId());
+           
 
             int affectedRows = pstmt.executeUpdate();
             // check the affected rows 
@@ -45,4 +46,5 @@ public class AvaliacaoDAO {
         
 		return id;
 	}
+	
 }

@@ -28,8 +28,8 @@ public class DiaDaSemanaDAO {
                 Statement.RETURN_GENERATED_KEYS)) {
 
         	pstmt.setString(1, dia.getDia());
-            pstmt.setString(2, String.valueOf( planoAlimentar.getId()));
-            pstmt.setString(3, String.valueOf(planoAlimentar.getId()));
+            pstmt.setLong(2, planoAlimentar.getId());
+            pstmt.setLong(3, planoAlimentar.getId());
            
             int affectedRows = pstmt.executeUpdate();
             // check the affected rows 

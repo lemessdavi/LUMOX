@@ -1,7 +1,7 @@
 package model;
 
 public abstract class Pessoa {
-	protected int id;
+	protected long id;
 	protected String nome;
 	protected String cpf;
 	protected String login;
@@ -19,11 +19,11 @@ public abstract class Pessoa {
 		
 		// pegar o id da criacao e retornar pra ca, e entao adicionalo no java
 	}
-	public int getId() {
+	public long getId() {
 		return id;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setId(long l) {
+		this.id = l;
 	}
 	public String getNome() {
 		return nome;

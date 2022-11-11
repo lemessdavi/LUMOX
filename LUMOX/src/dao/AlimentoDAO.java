@@ -15,7 +15,7 @@ public class AlimentoDAO {
 		Connection connection = cFactory.recuperarConexao();
 		
 		String  SQL = "insert into alimento (alimentonome, alimentocalorias, alimentopropriedades)"
-				+ "values  (?, ?, ? ";
+				+ "values  (?, ?, ? )";
 		
         long id = 0;
 
@@ -24,7 +24,7 @@ public class AlimentoDAO {
                 Statement.RETURN_GENERATED_KEYS)) {
 
             pstmt.setString(1, alimento.getNome());
-            pstmt.setString(2, String.valueOf(alimento.getCalorias()));
+            pstmt.setDouble(2, alimento.getCalorias());
             pstmt.setString(3, alimento.getPropriedades());
 
             int affectedRows = pstmt.executeUpdate();
