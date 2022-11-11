@@ -1,7 +1,7 @@
 package model;
 
 public class DiaDaSemana {
-	private int id;
+	private long id;
 	private String dia;
 	private PlanoAlimentar planoAlimentar;
 	private PlanoTreino planoTreino;
@@ -13,12 +13,12 @@ public class DiaDaSemana {
 		this.planoTreino = planoTreino;
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setId(long l) {
+		this.id = l;
 	}
 
 	public String getDia() {

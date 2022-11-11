@@ -2,7 +2,7 @@ package model;
 
 public class Avaliacao {
 	
-	private int id;
+	private long id;
 	private Atleta atleta;
 	private String avaliacao;
 	
@@ -12,11 +12,11 @@ public class Avaliacao {
 		this.avaliacao = avaliacao;
 	}
 	
-	public int getId() {
+	public long getId() {
 		return id;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setId(long l) {
+		this.id = l;
 	}
 	public Atleta getAtleta() {
 		return atleta;
