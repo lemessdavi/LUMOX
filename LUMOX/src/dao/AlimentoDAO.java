@@ -5,14 +5,22 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import model.Alimento;
 
 public class AlimentoDAO {
 
+	Connection connection;
+	ConnectionFactory cFactory;
+	
+	public AlimentoDAO() throws SQLException {
+		cFactory = new ConnectionFactory();
+		connection = cFactory.recuperarConexao();
+	}
+	
 	public long insertAlimento(Alimento alimento) throws SQLException {
-		ConnectionFactory cFactory = new ConnectionFactory();
-		Connection connection = cFactory.recuperarConexao();
+		
 		
 		String  SQL = "insert into alimento (alimentonome, alimentocalorias, alimentopropriedades)"
 				+ "values  (?, ?, ? )";
@@ -45,4 +53,30 @@ public class AlimentoDAO {
         
 		return id;
 	}
+	
+	public ArrayList<Alimento> selectAlimentos(){
+		
+		ArrayList<Alimento> alimentos = new ArrayList();
+		
+		try { 
+			 
+			
+			 String sql = "SELECT * FROM alimento";
+			 PreparedStatement ps = connection.prepareStatement(sql);
+			 ResultSet rs = ps.executeQuery();
+			 
+			 while(rs.next()) {
+			 
+			 Alimento alimento = new Alimento(rs.getLong(1),rs.getString(2),rs.getInt(3),rs.getString(4));
+			 alimentos.add(alimento);
+		
+			}
+			 
+			} catch (Exception e) {
+			 System.out.println(e.getMessage());
+			 e.printStackTrace();
+			}
+		return alimentos;
+	}
+	
 }

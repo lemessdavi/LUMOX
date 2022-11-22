@@ -2,6 +2,7 @@ package test;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.function.Consumer;
 
 import dao.AlimentoDAO;
 import dao.AtletaDAO;
@@ -19,7 +20,7 @@ import model.PlanoSemanal;
 import model.PlanoTreino;
 
 public class App {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws SQLException {
 		
 		Personal personal = new Personal("PersonalTeste", "3242342", "email@email", "senha");
 		PersonalDAO personalDAO = new PersonalDAO();
@@ -83,10 +84,12 @@ public class App {
 		
 		Atleta atleta = new Atleta("Teste", "28394298", "teste@gmail.com", "123");
 		AtletaDAO atletaDao = new AtletaDAO();
-		try {
-			atleta.setId(atletaDao.insertAtleta(atleta, null));
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		alimentoDAO.selectAlimentos().forEach(new Consumer<Alimento>() {
+			@Override
+			public void accept(Alimento a) {
+				System.out.println(a.getId());
+			}
+		});;
+		
 	}
 }	

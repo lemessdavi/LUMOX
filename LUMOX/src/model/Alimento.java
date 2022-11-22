@@ -13,6 +13,14 @@ public class Alimento {
 		this.propriedades = propriedades;
 	}
 	
+	public Alimento(long id,String nome, int calorias, String propriedades) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.calorias = calorias;
+		this.propriedades = propriedades;
+	}
+	
 	
 	public long getId() {
 		return id;
