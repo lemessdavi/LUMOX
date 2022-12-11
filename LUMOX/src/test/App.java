@@ -3,7 +3,7 @@ package test;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import controller.CRUDAlimento;
+import controller.AlimentoCRUD;
 import dao.AlimentoDAO;
 import dao.AtletaDAO;
 import dao.ExercicioDAO;
@@ -95,7 +95,7 @@ public class App {
 //		
 		
 		
-		CRUDAlimento alimentoController = new CRUDAlimento();
+		AlimentoCRUD alimentoController = new AlimentoCRUD();
 		alimentoController.updateAlimento(1,"feijao mais legal",0,"é um feijao");
 	}
 }

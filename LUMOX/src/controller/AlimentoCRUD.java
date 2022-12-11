@@ -5,16 +5,16 @@ import java.sql.SQLException;
 import dao.AlimentoDAO;
 import model.Alimento;
 
-public class CRUDAlimento {
+public class AlimentoCRUD {
 	private Alimento modelAlimento;
 	private AlimentoDAO daoAlimento;
 	
-	public CRUDAlimento(Alimento modelAlimento) {
+	public AlimentoCRUD(Alimento modelAlimento) {
 		daoAlimento = new AlimentoDAO();
 		this.modelAlimento = modelAlimento;
 	}
 	
-	public CRUDAlimento() {
+	public AlimentoCRUD() {
 		daoAlimento = new AlimentoDAO();
 	}
 	

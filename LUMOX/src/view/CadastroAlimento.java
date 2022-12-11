@@ -6,7 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import controller.CRUDAlimento;
+import controller.AlimentoCRUD;
 
 import javax.swing.JTextField;
 import javax.swing.JLabel;
@@ -21,7 +21,7 @@ public class CadastroAlimento extends JFrame {
 	private JTextField textFieldNome;
 	private JTextField textFieldCalorias;
 	private JTextField textFieldPropriedades;
-	private CRUDAlimento alimentoController = new CRUDAlimento();
+	private AlimentoCRUD alimentoController = new AlimentoCRUD();
 
 	/**
 	 * Launch the application.

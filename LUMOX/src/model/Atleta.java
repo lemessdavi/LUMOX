@@ -10,6 +10,10 @@ public class Atleta extends Pessoa {
 		// TODO Auto-generated constructor stub
 	}
 
+	public Atleta(long id, String nome, String cpf, String login, String senha) {
+		super(id,nome, cpf, login, senha);
+	}
+
 	public PlanoSemanal getPlano() {
 		return plano;
 	}

@@ -19,6 +19,13 @@ public abstract class Pessoa {
 		
 		// pegar o id da criacao e retornar pra ca, e entao adicionalo no java
 	}
+	public Pessoa(long id2, String nome, String cpf, String login, String senha) {
+		this.id= id2;
+		this.nome = nome;
+		this.cpf = cpf;
+		this.login = login;
+		this.senha = senha;
+	}
 	public long getId() {
 		return id;
 	}

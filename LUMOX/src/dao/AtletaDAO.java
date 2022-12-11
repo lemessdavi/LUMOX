@@ -49,4 +49,38 @@ public class AtletaDAO {
         
 		return id;
 	}
+	
+	public boolean updateAtleta(Atleta atleta, PlanoSemanal planoSemanal) throws SQLException {
+		ConnectionFactory cFactory = new ConnectionFactory();
+		Connection connection = cFactory.recuperarConexao();
+		
+		String  SQL = "update atleta "
+				+ "set atletanome = ?"
+				+ ", atletacpf  = ?"
+				+ ", atletaemail  = ?"
+				+ ", atletasenha  = ?"
+				+ ", atletaplanosemanal  = ?"
+				+ "where atletaid = ?;";
+		
+        try (
+                PreparedStatement pstmt = connection.prepareStatement(SQL)) {
+
+        	pstmt.setString(1, atleta.getNome());
+            pstmt.setString(2, atleta.getCpf());
+            pstmt.setString(3, atleta.getLogin());
+            pstmt.setString(4, atleta.getSenha());
+            pstmt.setLong(5, planoSemanal.getId());
+            pstmt.setLong(6, atleta.getId());
+
+            int affectedRows = pstmt.executeUpdate();
+            // check the affected rows 
+            if (affectedRows > 0) {
+            	return true;
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        
+		return false;
+	}
 }
