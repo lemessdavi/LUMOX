@@ -12,6 +12,14 @@ public class DiaDaSemana {
 		this.planoAlimentar = planoAlimentar;
 		this.planoTreino = planoTreino;
 	}
+	
+	public DiaDaSemana(long id, String dia, PlanoAlimentar planoAlimentar, PlanoTreino planoTreino) {
+		super();
+		this.id = id;
+		this.dia = dia;
+		this.planoAlimentar = planoAlimentar;
+		this.planoTreino = planoTreino;
+	}
 
 	public long getId() {
 		return id;

@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import controller.CadastrarPersonal;
+import controller.PersonalCRUD;
 
 import javax.swing.JTextField;
 import javax.swing.JLabel;
@@ -22,7 +22,7 @@ public class CadastroPersonal extends JFrame {
 	private JTextField textFieldCPF;
 	private JTextField textFieldSenha;
 	private JTextField textFieldLogin;
-	private CadastrarPersonal controllerPersonal = new CadastrarPersonal();
+	private PersonalCRUD controllerPersonal = new PersonalCRUD();
 
 	/**
 	 * Launch the application.

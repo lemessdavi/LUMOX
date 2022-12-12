@@ -14,6 +14,13 @@ public class PlanoTreino {
 		this.treino = treino;
 	}
 
+	public PlanoTreino(long id, String nome, ArrayList<Exercicio> treino) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.treino = treino;
+	}
+	
 	public long getId() {
 		return id;
 	}

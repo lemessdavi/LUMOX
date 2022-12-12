@@ -14,6 +14,11 @@ public class Personal extends Pessoa {
 		super(nome, cpf, login, senha);
 		this.atletas = atletas;
 	}
+	
+	public Personal(long id,String nome, String cpf, String login, String senha) {
+		super(nome, cpf, login, senha);
+		this.id = id;
+	}
 
 	public ArrayList<Atleta> getAtletas() {
 		return atletas;

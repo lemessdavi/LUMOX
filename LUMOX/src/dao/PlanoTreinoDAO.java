@@ -46,4 +46,35 @@ public class PlanoTreinoDAO {
         
 		return id;
 	}
+	
+	public boolean updatePlanoTreino(PlanoTreino plano, Personal personal) throws SQLException {
+		ConnectionFactory cFactory = new ConnectionFactory();
+		Connection connection = cFactory.recuperarConexao();
+		
+		String  SQL = " update planotreino "
+				+ "set planotreinonome = ?,"
+				+ "planotreinopersonal = ?"
+				+ "where planotreinoid = ?;" ;
+		
+
+        try (
+                PreparedStatement pstmt = connection.prepareStatement(SQL)) {
+
+            pstmt.setString(1, plano.getNome());
+            pstmt.setLong(2, personal.getId());
+            pstmt.setLong(3, plano.getId());
+           
+
+            int affectedRows = pstmt.executeUpdate();
+            // check the affected rows 
+            if (affectedRows > 0) {
+               return true;
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        
+       
+		return false;
+	}
 }

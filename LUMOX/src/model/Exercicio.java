@@ -16,6 +16,15 @@ public class Exercicio {
 		this.instrucoes = instrucoes;
 	}
 	
+	public Exercicio(long id, String nome, String repeticoes, String tempo, String instrucoes) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.repeticoes = repeticoes;
+		this.tempo = tempo;
+		this.instrucoes = instrucoes;
+	}
+	
 	public long getId() {
 		return id;
 	}

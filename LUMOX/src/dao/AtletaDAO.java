@@ -29,7 +29,7 @@ public class AtletaDAO {
             pstmt.setString(2, atleta.getCpf());
             pstmt.setString(3, atleta.getLogin());
             pstmt.setString(4, atleta.getSenha());
-            pstmt.setInt(5, planoSemanal.getId());
+            pstmt.setLong(5, planoSemanal.getId());
 
             int affectedRows = pstmt.executeUpdate();
             // check the affected rows 

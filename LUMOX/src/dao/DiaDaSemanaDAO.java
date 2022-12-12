@@ -49,4 +49,38 @@ public class DiaDaSemanaDAO {
         
 		return id;
 	}
+	
+	public boolean updateDiaDaSemana(DiaDaSemana dia, PlanoAlimentar planoAlimentar, PlanoTreino planoTreino) throws SQLException {
+		ConnectionFactory cFactory = new ConnectionFactory();
+		Connection connection = cFactory.recuperarConexao();
+		
+		String  SQL = "update diadasemana "
+				+ ", diadasemananome = ? "
+				+ ", diadasemanaplanalim  = ?"
+				+ ", diadasemanaplanexer  = ?"
+				+ "where diadasemanaid = ?; ";
+		
+        long id = 0;
+
+        try (
+                PreparedStatement pstmt = connection.prepareStatement(SQL)) {
+
+        	pstmt.setString(1, dia.getDia());
+            pstmt.setLong(2, planoAlimentar.getId());
+            pstmt.setLong(3, planoTreino.getId());
+            pstmt.setLong(4, dia.getId());
+           
+            int affectedRows = pstmt.executeUpdate();
+            // check the affected rows 
+            if (affectedRows > 0) {
+                // get the ID back
+                return true;
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        
+		return false;
+	}
+	
 }

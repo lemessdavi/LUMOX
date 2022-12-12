@@ -18,6 +18,16 @@ public class PlanoAlimentar {
 		this.noite = noite;
 	}
 	
+	public PlanoAlimentar(long id, String nome, ArrayList<Alimento> manha, ArrayList<Alimento> tarde, ArrayList<Alimento> noite) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.manha = manha;
+		this.tarde = tarde;
+		this.noite = noite;
+	}
+	
+	
 	public long getId() {
 		return id;
 	}

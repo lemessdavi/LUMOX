@@ -46,4 +46,33 @@ public class ExercicioDAO {
         
 		return id;
 	}
+
+	public boolean updateExercicio(Exercicio exercicio) throws SQLException {
+		ConnectionFactory cFactory = new ConnectionFactory();
+		Connection connection = cFactory.recuperarConexao();
+		
+		String  SQL = "update exercicio "
+				+ "set exercicionome = ?"
+				+ ", exerciciorepeticoes = ?"
+				+ ", exerciciotempo = ?"
+				+ ", exercicioinstrucoes = ?"
+				+ "where exercicioid = ?;";
+		
+        try (
+                PreparedStatement pstmt = connection.prepareStatement(SQL)) {
+
+            pstmt.setString(1, exercicio.getNome());
+            pstmt.setString(2, exercicio.getRepeticoes());
+            pstmt.setString(3, exercicio.getTempo());
+            pstmt.setString(4, exercicio.getInstrucoes());
+            pstmt.setLong(5, exercicio.getId());
+
+            int affectedRows = pstmt.executeUpdate();
+            // check the affected rows 
+            if (affectedRows > 0) {
+              return true;
+            }
+        }
+		return false;
+	}
 }

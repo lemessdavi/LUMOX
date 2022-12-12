@@ -3,7 +3,7 @@ package model;
 import java.util.ArrayList;
 
 public class PlanoSemanal {
-	private int id;
+	private long id;
 	private String nome;
 	private ArrayList<DiaDaSemana> semana;
 	
@@ -12,13 +12,20 @@ public class PlanoSemanal {
 		this.nome = nome;
 		this.semana = semana;
 	}
+	
+	public PlanoSemanal(long id, String nome, ArrayList<DiaDaSemana> semana) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.semana = semana;
+	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setId(long l) {
+		this.id = l;
 	}
 
 	public String getNome() {
@@ -37,5 +44,7 @@ public class PlanoSemanal {
 		this.semana = semana;
 	}
 	
-	
+	public DiaDaSemana getDiaSemana(int n) {
+		return semana.get(n);
+	}
 }
