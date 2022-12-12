@@ -4,7 +4,7 @@ import dao.AvaliacaoDAO;
 import model.Atleta;
 import model.Avaliacao;
 
-public class CadastrarAvaliacao {
+public class AvaliacaoCRUD {
 	private Avaliacao avaliacaoModel;
 	private AvaliacaoDAO avaliacaoDAO;
 	
@@ -18,5 +18,17 @@ public class CadastrarAvaliacao {
 			e.printStackTrace();
 			return false;
 		}
-	}	
+	}
+	
+	public boolean updateAvaliacao(Atleta atleta, String texto, long id) {
+		avaliacaoModel = new Avaliacao(id, atleta, texto);
+		avaliacaoDAO = new AvaliacaoDAO();
+		try {
+			avaliacaoDAO.updateAvaliacao(avaliacaoModel, atleta);
+			return true;
+		}catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 }
