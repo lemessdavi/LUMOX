@@ -60,7 +60,6 @@ public class DiaDaSemanaDAO {
 				+ ", diadasemanaplanexer  = ?"
 				+ "where diadasemanaid = ?; ";
 		
-        long id = 0;
 
         try (
                 PreparedStatement pstmt = connection.prepareStatement(SQL)) {
@@ -73,7 +72,6 @@ public class DiaDaSemanaDAO {
             int affectedRows = pstmt.executeUpdate();
             // check the affected rows 
             if (affectedRows > 0) {
-                // get the ID back
                 return true;
             }
         } catch (SQLException ex) {
@@ -81,6 +79,34 @@ public class DiaDaSemanaDAO {
         }
         
 		return false;
+	}
+
+	public DiaDaSemana selectDiaDaSemana(long ids) throws SQLException {
+		
+		ConnectionFactory cFactory = new ConnectionFactory();
+		Connection connection = cFactory.recuperarConexao();
+		
+		String query = "select * from diadasemana where diadasemana.diadasemanaid = ?;";
+		
+		PreparedStatement pstmt = connection.prepareStatement(query);
+		
+		pstmt.setLong(1, ids);
+        
+		ResultSet rs = pstmt.executeQuery();
+		
+		long id = rs.getLong(0);
+		String nome = rs.getString(1);
+		
+		PlanoAlimentarDAO planoalimentarDAO = new PlanoAlimentarDAO();
+		PlanoAlimentar planoalimentar = planoalimentarDAO.selectPlanoAlimentar(rs.getLong(2));
+		
+		PlanoTreinoDAO planoTreinoDAO = new PlanoTreinoDAO();
+		PlanoTreino planoTreino = planoTreinoDAO.selectPlanoTreino(rs.getLong(3));
+		
+		
+		DiaDaSemana dia = new DiaDaSemana(id,nome, planoalimentar, planoTreino);
+		
+		return dia;
 	}
 	
 }

@@ -6,7 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import model.DiaDaSemana;
 import model.Personal;
+import model.PlanoSemanal;
 
 public class PersonalDAO {
 	
@@ -75,5 +77,28 @@ public class PersonalDAO {
             }
         }
 		return false;
+	}
+
+	public Personal selectPersonal(long long1) throws SQLException {
+		ConnectionFactory cFactory = new ConnectionFactory();
+		Connection connection = cFactory.recuperarConexao();
+		
+		String query = "select * from personal where personal.personalid = ?;";
+		
+		PreparedStatement pstmt = connection.prepareStatement(query);
+		
+		pstmt.setLong(1, long1);
+        
+		ResultSet rs = pstmt.executeQuery();
+		
+		long id = rs.getLong(0);
+		String nome = rs.getString(1);
+		String cpf = rs.getString(2);
+		String email = rs.getString(3);
+		String senha = rs.getString(4);
+		
+		Personal personal = new Personal (id, nome, cpf, email, senha);
+		
+		return personal;
 	}
 }

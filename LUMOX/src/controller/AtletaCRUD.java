@@ -1,5 +1,6 @@
 package controller;
 
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
 import dao.AtletaDAO;
@@ -31,5 +32,23 @@ public class AtletaCRUD {
 			e.printStackTrace();
 			return false;
 		}
+	}
+	
+	public String[] selectJTable(String dia, Atleta atleta) {
+		
+		try {
+			ResultSetMetaData rsmd = daoAtleta.selectAlimentosDoDia(atleta,dia);
+			int cols = rsmd.getColumnCount();
+			String[] colName =  new String[cols];
+			
+			for (int i = 0; i < cols; i++) {
+				colName[i] = rsmd.getColumnName(i+1);
+			}
+			
+			return colName;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 }

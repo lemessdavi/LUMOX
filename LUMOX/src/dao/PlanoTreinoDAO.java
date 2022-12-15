@@ -3,10 +3,16 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
+import model.DiaDaSemana;
+import model.Exercicio;
 import model.Personal;
+import model.PlanoAlimentar;
 import model.PlanoTreino;
 
 public class PlanoTreinoDAO {
@@ -76,5 +82,53 @@ public class PlanoTreinoDAO {
         
        
 		return false;
+	}
+
+	public PlanoTreino selectPlanoTreino(long ids) throws SQLException {
+		
+		ConnectionFactory cFactory = new ConnectionFactory();
+		Connection connection = cFactory.recuperarConexao();
+		
+		String query = "select * from planotreinoxexercicio inner join planotreino on planotreinoxexercicio.planotreinoid = planotreino.planotreinoid where planotreino.planotreinoid = ?;";
+		
+		PreparedStatement pstmt = connection.prepareStatement(query);
+		
+		pstmt.setLong(1, ids);
+        
+		ResultSet rs = pstmt.executeQuery();
+		
+		long id = rs.getLong("planotreino.planotreinoid");
+		String nome = rs.getString("planotreino.planotreinonome");
+		
+		PersonalDAO personalDAO = new PersonalDAO();
+		Personal personal = personalDAO.selectPersonal(rs.getLong("planotreinopersonal"));
+		
+		ArrayList<Exercicio> exercicios = null;
+		
+		List<Long> exerciciosids = new ArrayList<>();
+		
+		
+		String sql = "select exercicio.exercicioid from planotreinoxexercicio inner join planotreino on planotreinoxexercicio.planotreinoid = planotreino.planotreinoid  where planotreino.planotreinoid = ?;";
+		
+		PreparedStatement stmt = connection.prepareStatement(sql);
+		ResultSet rs2 = stmt.executeQuery(); 
+		
+		while (rs.next()) {
+			exerciciosids.add(rs.getLong("exercicioid"));
+		}
+		
+		for (Long long1 : exerciciosids) {
+			ExercicioDAO exercicioDAO = new ExercicioDAO();
+			Exercicio exercicio = exercicioDAO.selectExercicio(long1);
+			exercicios.add(exercicio);
+		}
+		    
+		    
+		
+		PlanoTreino plano = new PlanoTreino(id, nome, exercicios, personal);
+		
+		
+		
+		return plano;
 	}
 }

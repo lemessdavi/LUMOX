@@ -1,13 +1,17 @@
 package controller;
 
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
+import javax.swing.table.*;
+import javax.swing.*;
 import dao.AlimentoDAO;
 import model.Alimento;
 
 public class AlimentoCRUD {
 	private Alimento modelAlimento;
 	private AlimentoDAO daoAlimento;
+	
 	
 	public AlimentoCRUD(Alimento modelAlimento) {
 		daoAlimento = new AlimentoDAO();
@@ -46,5 +50,21 @@ public class AlimentoCRUD {
 	}
 	
 	
-	
+	public String[] selectJTable() {
+		
+		try {
+			ResultSetMetaData rsmd = daoAlimento.selectAlimento();
+			int cols = rsmd.getColumnCount();
+			String[] colName =  new String[cols];
+			
+			for (int i = 0; i < cols; i++) {
+				colName[i] = rsmd.getColumnName(i+1);
+			}
+			
+			return colName;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 }

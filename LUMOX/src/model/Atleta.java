@@ -1,5 +1,9 @@
 package model;
 
+import java.sql.SQLException;
+
+import dao.PlanoSemanalDAO;
+
 public class Atleta extends Pessoa {
 	
 	private PlanoSemanal plano;
@@ -12,6 +16,11 @@ public class Atleta extends Pessoa {
 
 	public Atleta(long id, String nome, String cpf, String login, String senha) {
 		super(id,nome, cpf, login, senha);
+	}
+
+	public Atleta(long id, String nome, String cpf, String login, String senha, PlanoSemanal plano) throws SQLException {
+		super(id,nome, cpf, login, senha);
+		this.plano = plano;
 	}
 
 	public PlanoSemanal getPlano() {

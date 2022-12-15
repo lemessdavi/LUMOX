@@ -6,7 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import model.DiaDaSemana;
 import model.Exercicio;
+import model.PlanoSemanal;
 
 public class ExercicioDAO {
 	
@@ -74,5 +76,28 @@ public class ExercicioDAO {
             }
         }
 		return false;
+	}
+
+	public Exercicio selectExercicio(Long long1) throws SQLException {
+		
+		ConnectionFactory cFactory = new ConnectionFactory();
+		Connection connection = cFactory.recuperarConexao();
+		
+		String query = "select * from exercicio where exercicio.exercicioid = ?;";
+		
+		PreparedStatement pstmt = connection.prepareStatement(query);
+		
+		pstmt.setLong(1, long1);
+        
+		ResultSet rs = pstmt.executeQuery();
+		
+		long id = rs.getLong("exercicioid");
+		String nome = rs.getString("exercicionome");
+		String rep = String.valueOf(rs.getInt("exerciciorepeticoes")); //mudar no banco para string, tirar o valuof daqui e dar um getString
+		String tempo = rs.getString("exerciciotempo");
+		String  instr = rs.getString("exercicioinstrucoes");
+		
+		Exercicio exercicio = new Exercicio(id, nome, rep, tempo, instr);
+		return exercicio;
 	}
 }

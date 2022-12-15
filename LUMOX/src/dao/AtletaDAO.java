@@ -3,6 +3,7 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -82,5 +83,54 @@ public class AtletaDAO {
         }
         
 		return false;
+	}
+	
+	
+	public ResultSetMetaData selectAlimentosDoDia(Atleta atleta, String dia) throws SQLException {
+		
+		ConnectionFactory cFactory = new ConnectionFactory();
+		Connection connection = cFactory.recuperarConexao();
+		
+		String query = "select  alimento.alimentonome, alimento.alimentocalorias, alimento.alimentopropriedades from planosemanal \r\n"
+				+ "	inner join atleta on atleta.atletaplanosemanal = planosemanal.planosemanalid\r\n"
+				+ "	inner join diadasemana on planosemanal.?= diadasemana.diadasemanaid\r\n"
+				+ "	inner join planoalimentar on planoalimentar.planoalimentarid = diadasemana.diadasemanaplanalim\r\n"
+				+ "	inner join planoalimentarxalimento on planoalimentar.planoalimentarid = planoalimentarxalimento.planoalimentarid\r\n"
+				+ "	inner join alimento on planoalimentarxalimento.alimentoid = alimento.alimentoid \r\n"
+				+ "	where atleta.atletaid = ? \r\n"
+				+ "	group by diadasemana.diadasemanaid,alimento.alimentonome, alimento.alimentocalorias, alimento.alimentopropriedades  ;";
+		
+		PreparedStatement pstmt = connection.prepareStatement(query);
+		
+		pstmt.setString(1, dia);
+        pstmt.setLong(2, atleta.getId());
+        
+ 		
+		ResultSet rs = pstmt.executeQuery();
+		
+		return rs.getMetaData();
+		
+	}
+	
+	public ResultSetMetaData createAtletaOnLogin(String login, String senha) throws SQLException {
+		
+
+		ConnectionFactory cFactory = new ConnectionFactory();
+		Connection connection = cFactory.recuperarConexao();
+		
+		String query = "select * from atleta where atleta.atletaemail like ? and atleta.atletasenha like ?";
+		
+		PreparedStatement pstmt = connection.prepareStatement(query);
+		
+		pstmt.setString(1, login);
+        pstmt.setString(2, senha);
+        
+		ResultSet rs = pstmt.executeQuery();
+		
+		PlanoSemanalDAO dao = new PlanoSemanalDAO();
+		PlanoSemanal plano = dao.selectPlanoSemanal(rs.getLong(5));
+		
+		Atleta atleta = new Atleta(rs.getLong(0), rs.getString(1), rs.getString(2), rs.getString(3),rs.getString(4),plano);
+		return rs.getMetaData();
 	}
 }

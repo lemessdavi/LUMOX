@@ -13,7 +13,7 @@ public class PlanoTreinoCRUD {
 	PlanoTreinoDAO planoTreinoDAO;
 	
 	public boolean cadastrarPlanoTreino(String nome, ArrayList<Exercicio> treino, Personal personal) {
-		planoTreino = new PlanoTreino(nome, treino);
+		planoTreino = new PlanoTreino(nome, treino, personal);
 		planoTreinoDAO = new PlanoTreinoDAO();
 		try {
 			planoTreino.setId(planoTreinoDAO.insertPlanoTreino(planoTreino, personal));
@@ -25,7 +25,7 @@ public class PlanoTreinoCRUD {
 	}
 	
 	public boolean updatePlanoTreino(long id ,String nome, ArrayList<Exercicio> treino, Personal personal) {
-		planoTreino = new PlanoTreino(id, nome, treino);
+		planoTreino = new PlanoTreino(id, nome, treino, personal);
 		planoTreinoDAO = new PlanoTreinoDAO();
 		try {
 			planoTreinoDAO.updatePlanoTreino(planoTreino, personal);

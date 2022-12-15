@@ -3,6 +3,7 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -74,6 +75,34 @@ public class AlimentoDAO {
         }
         
 		return false;
+	}
+	
+	public ResultSetMetaData selectAlimento() throws SQLException {
+		ConnectionFactory cFactory = new ConnectionFactory();
+		Connection connection = cFactory.recuperarConexao();
+		
+		String query = "select alimento.alimentonome, alimento.alimentocalorias, alimento.alimentopropriedades from alimento";
+		
+		PreparedStatement pstmt = connection.prepareStatement(query);
+		
+		ResultSet rs = pstmt.executeQuery();
+		
+		return rs.getMetaData();
+		
+	}
+	
+	public Alimento selectAlimento(Long long2) throws SQLException {
+		ConnectionFactory cFactory = new ConnectionFactory();
+		Connection connection = cFactory.recuperarConexao();
+		
+		String query = "select * from alimento where alimento.alimentoid = ?;";
+		
+		PreparedStatement pstmt = connection.prepareStatement(query);
+		
+		ResultSet rs = pstmt.executeQuery();
+		
+		return new Alimento(rs.getLong(0), rs.getString(1), rs.getDouble(2), rs.getString(3));
+		
 	}
 	
 	

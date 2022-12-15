@@ -7,18 +7,21 @@ public class PlanoTreino {
 	private long id;
 	private String nome;
 	private ArrayList<Exercicio> treino;
+	private Personal personal;
 	
-	public PlanoTreino(String nome, ArrayList<Exercicio> treino) {
+	public PlanoTreino(String nome, ArrayList<Exercicio> treino, Personal personal) {
 		super();
 		this.nome = nome;
 		this.treino = treino;
+		this.personal = personal;
 	}
 
-	public PlanoTreino(long id, String nome, ArrayList<Exercicio> treino) {
+	public PlanoTreino(long id, String nome, ArrayList<Exercicio> treino,  Personal personal) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.treino = treino;
+		this.personal = personal;
 	}
 	
 	public long getId() {

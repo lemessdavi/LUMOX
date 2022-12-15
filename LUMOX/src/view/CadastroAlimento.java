@@ -52,6 +52,7 @@ public class CadastroAlimento extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		
 		textFieldNome = new JTextField();
 		textFieldNome.setBounds(28, 49, 113, 20);
 		contentPane.add(textFieldNome);

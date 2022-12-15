@@ -13,8 +13,9 @@ public class PlanoSemanalCRUD {
 	PlanoSemanal planoSemanal;
 	PlanoSemanalDAO planoSemanalDAO;
 	
-	public boolean cadastrarExercicio(String nome, ArrayList<DiaDaSemana> semana) {
-		planoSemanal = new PlanoSemanal(nome, semana);
+	public boolean cadastrarExercicio(String nome, DiaDaSemana segunda, DiaDaSemana terca, DiaDaSemana quarta,
+			DiaDaSemana quinta, DiaDaSemana sexta, DiaDaSemana sabado, DiaDaSemana domingo) {
+		planoSemanal = new PlanoSemanal(nome, segunda, terca, quarta, quinta, sexta, sabado, domingo);
 		planoSemanalDAO = new PlanoSemanalDAO();
 		try {
 			planoSemanal.setId(planoSemanalDAO.insertPlanoSemanal(planoSemanal));
@@ -25,8 +26,9 @@ public class PlanoSemanalCRUD {
 		}
 	}
 	
-	public boolean updateExercicio(long id, String nome, ArrayList<DiaDaSemana> semana) {
-		planoSemanal = new PlanoSemanal(id, nome, semana);
+	public boolean updateExercicio(long id, String nome, DiaDaSemana segunda, DiaDaSemana terca, DiaDaSemana quarta,
+			DiaDaSemana quinta, DiaDaSemana sexta, DiaDaSemana sabado, DiaDaSemana domingo) {
+		planoSemanal = new PlanoSemanal(id, nome, segunda, terca, quarta, quinta, sexta, sabado, domingo);
 		planoSemanalDAO = new PlanoSemanalDAO();
 		try {
 			planoSemanalDAO.updatePlanoSemanal(planoSemanal);
