@@ -30,13 +30,18 @@ public class HomeAtleta extends JFrame {
 		contentPane.setLayout(null);
 		
 		JButton btnPlanoTreinos = new JButton("Ver Plano de Treinos");
+		btnPlanoTreinos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AtletaPlanoTreino tela = new AtletaPlanoTreino(atleta);
+				tela.show();
+			}
+		});
 		btnPlanoTreinos.setBounds(68, 164, 187, 23);
 		contentPane.add(btnPlanoTreinos);
 		
 		JButton btnPlanoAlimentos = new JButton("Ver Plano de Alimentos");
 		btnPlanoAlimentos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println(atleta.getId());
 				AtletaPlanoAlimentar tela = new AtletaPlanoAlimentar(atleta);
 				tela.show();
 			}

@@ -15,6 +15,8 @@ import javax.swing.JTable;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 
 public class AtletaPlanoTreino extends JFrame {
@@ -63,10 +65,26 @@ public class AtletaPlanoTreino extends JFrame {
 				AtletaCRUD crud = new AtletaCRUD();
 				
 				model.setColumnIdentifiers(crud.selectJTableModelTreino((String) comboBoxDia.getSelectedItem(), atleta));
+				String exercicionome, exerciciorepeticoes, exerciciotempo, exercicioinstrucoes;
 				
 				while(model.getRowCount() > 0)
 				{
 					model.removeRow(0);
+				}
+				
+				ResultSet rs = crud.selectJtableContentsTreino((String) comboBoxDia.getSelectedItem(), atleta);
+				
+				try {
+					while(rs.next()) {
+						exercicionome =rs.getString("exercicionome");
+						exerciciorepeticoes =rs.getString("exerciciorepeticoes");
+						exerciciotempo =rs.getString("exerciciotempo");
+						exercicioinstrucoes = rs.getString("exercicioinstrucoes");
+						String[] row = {exercicionome,exerciciorepeticoes,exerciciotempo,exercicioinstrucoes};
+						model.addRow(row);
+					}
+				} catch (SQLException e1) {
+					e1.printStackTrace();
 				}
 			}
 		});

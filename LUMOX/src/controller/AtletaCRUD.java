@@ -93,4 +93,18 @@ public class AtletaCRUD {
 		}
 		return null;
 	}
+
+	public ResultSet selectJtableContentsTreino(String dia, Atleta atleta) {
+		
+		
+		try {
+			ResultSet rs = daoAtleta.selectExerciciosDoDiaContent(atleta,dia);
+			
+			return rs;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 }
