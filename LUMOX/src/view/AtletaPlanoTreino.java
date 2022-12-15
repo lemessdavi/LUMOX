@@ -6,38 +6,30 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 
+import controller.AtletaCRUD;
 import model.Atleta;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
-import javax.swing.table.*;
-
-import controller.AtletaCRUD;
-import dao.AtletaDAO;
-
 import java.awt.event.ActionListener;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 
-public class AtletaPlanoAlimentar extends JFrame {
+public class AtletaPlanoTreino extends JFrame {
 
 	private JPanel contentPane;
+	private Atleta atleta;
 	private JTable table;
-	private JButton btnNewButton;
-	Atleta atleta;
-
-
 
 	/**
 	 * Create the frame.
 	 */
-	public AtletaPlanoAlimentar(Atleta atleta1) {
-		atleta = atleta1;
+	public AtletaPlanoTreino(Atleta a) {
+		atleta = a;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 919, 573);
+		setBounds(100, 100, 674, 452);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -45,7 +37,7 @@ public class AtletaPlanoAlimentar extends JFrame {
 		contentPane.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(30, 22, 595, 501);
+		scrollPane.setBounds(23, 22, 398, 366);
 		contentPane.add(scrollPane);
 		
 		table = new JTable();
@@ -61,41 +53,27 @@ public class AtletaPlanoAlimentar extends JFrame {
 		dias.add("domingo");
 		
 		final JComboBox comboBoxDia = new JComboBox(dias.toArray());
-		comboBoxDia.setToolTipText("DiaDaSemana");
-		comboBoxDia.setBounds(666, 41, 181, 22);
+		comboBoxDia.setBounds(465, 41, 141, 22);
 		contentPane.add(comboBoxDia);
 		
-		btnNewButton = new JButton("Visualizar");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton btnPopulaTabela = new JButton("New button");
+		btnPopulaTabela.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DefaultTableModel model = (DefaultTableModel) table.getModel();
 				AtletaCRUD crud = new AtletaCRUD();
 				
-				model.setColumnIdentifiers(crud.selectJTableModelAlimento((String) comboBoxDia.getSelectedItem(), atleta));
-				String alimentonome = null,alimentocalorias = null,alimentopropriedades = null;
+				model.setColumnIdentifiers(crud.selectJTableModelTreino((String) comboBoxDia.getSelectedItem(), atleta));
 				
 				while(model.getRowCount() > 0)
 				{
 					model.removeRow(0);
 				}
-				
-				ResultSet rs = crud.selectJtableContentsAlimento((String) comboBoxDia.getSelectedItem(), atleta);
-				
-				try {
-					while(rs.next()) {
-						alimentonome =rs.getString("alimentonome");
-						alimentocalorias =rs.getString("alimentocalorias");
-						alimentopropriedades =rs.getString("alimentopropriedades");
-						String[] row = {alimentonome,alimentocalorias,alimentopropriedades};
-						model.addRow(row);
-					}
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
-				
 			}
 		});
-		btnNewButton.setBounds(713, 159, 89, 23);
-		contentPane.add(btnNewButton);
+		btnPopulaTabela.setBounds(494, 162, 89, 23);
+		contentPane.add(btnPopulaTabela);
+		
+		
 	}
+
 }
