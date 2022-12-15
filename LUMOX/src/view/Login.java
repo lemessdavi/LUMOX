@@ -86,6 +86,7 @@ public class Login extends JFrame {
 				if(!chckbxPersonal.isSelected()) {
 					AtletaCRUD crud = new AtletaCRUD();
 					Atleta atleta = crud.verifyLogin(textFieldLogin.getText(),textFieldSenha.getText());
+					System.out.println("tela login " + atleta.getId());
 					if(atleta !=null) {
 						HomeAtleta home = new HomeAtleta(atleta);
 						home.show();

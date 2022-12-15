@@ -86,29 +86,55 @@ public class AtletaDAO {
 	}
 	
 	
-	public ResultSetMetaData selectAlimentosDoDia(Atleta atleta, String dia) throws SQLException {
+	public ResultSetMetaData selectAlimentosDoDiaModel(Atleta atleta, String dia) throws SQLException {
 		
 		ConnectionFactory cFactory = new ConnectionFactory();
 		Connection connection = cFactory.recuperarConexao();
 		
-		String query = "select  alimento.alimentonome, alimento.alimentocalorias, alimento.alimentopropriedades from planosemanal \r\n"
-				+ "	inner join atleta on atleta.atletaplanosemanal = planosemanal.planosemanalid\r\n"
-				+ "	inner join diadasemana on planosemanal.?= diadasemana.diadasemanaid\r\n"
-				+ "	inner join planoalimentar on planoalimentar.planoalimentarid = diadasemana.diadasemanaplanalim\r\n"
-				+ "	inner join planoalimentarxalimento on planoalimentar.planoalimentarid = planoalimentarxalimento.planoalimentarid\r\n"
-				+ "	inner join alimento on planoalimentarxalimento.alimentoid = alimento.alimentoid \r\n"
-				+ "	where atleta.atletaid = ? \r\n"
-				+ "	group by diadasemana.diadasemanaid,alimento.alimentonome, alimento.alimentocalorias, alimento.alimentopropriedades  ;";
+		String query = "select  alimento.alimentonome, alimento.alimentocalorias, alimento.alimentopropriedades from planosemanal "
+				+ "	inner join atleta on atleta.atletaplanosemanal = planosemanal.planosemanalid "
+				+ "	inner join diadasemana on planosemanal." + dia + " = diadasemana.diadasemanaid "
+				+ "	inner join planoalimentar on planoalimentar.planoalimentarid = diadasemana.diadasemanaplanalim "
+				+ "	inner join planoalimentarxalimento on planoalimentar.planoalimentarid = planoalimentarxalimento.planoalimentarid "
+				+ "	inner join alimento on planoalimentarxalimento.alimentoid = alimento.alimentoid "
+				+ "	where atleta.atletaid = ? "
+				+ "	group by diadasemana.diadasemanaid,alimento.alimentonome, alimento.alimentocalorias, alimento.alimentopropriedades;";
 		
 		PreparedStatement pstmt = connection.prepareStatement(query);
 		
-		pstmt.setString(1, dia);
-        pstmt.setLong(2, atleta.getId());
+        pstmt.setLong(1, atleta.getId());
         
  		
 		ResultSet rs = pstmt.executeQuery();
 		
+		System.out.println(rs.next());
+		
 		return rs.getMetaData();
+		
+	}
+	
+public ResultSet selectAlimentosDoDiaContent(Atleta atleta, String dia) throws SQLException {
+		
+		ConnectionFactory cFactory = new ConnectionFactory();
+		Connection connection = cFactory.recuperarConexao();
+		
+		String query = "select  alimento.alimentonome, alimento.alimentocalorias, alimento.alimentopropriedades from planosemanal "
+				+ "	inner join atleta on atleta.atletaplanosemanal = planosemanal.planosemanalid "
+				+ "	inner join diadasemana on planosemanal." + dia + " = diadasemana.diadasemanaid "
+				+ "	inner join planoalimentar on planoalimentar.planoalimentarid = diadasemana.diadasemanaplanalim "
+				+ "	inner join planoalimentarxalimento on planoalimentar.planoalimentarid = planoalimentarxalimento.planoalimentarid "
+				+ "	inner join alimento on planoalimentarxalimento.alimentoid = alimento.alimentoid "
+				+ "	where atleta.atletaid = ?; ";
+		
+		PreparedStatement pstmt = connection.prepareStatement(query);
+		
+		System.out.println(atleta.getId());
+        pstmt.setLong(1, atleta.getId());
+        
+ 		
+		ResultSet rs = pstmt.executeQuery();
+		
+		return rs;
 		
 	}
 	
@@ -129,16 +155,6 @@ public class AtletaDAO {
 		
 		PlanoSemanal plano = null;
 		
-		while(rs.next()) {
-			PlanoSemanalDAO dao = new PlanoSemanalDAO();
-			plano = dao.selectPlanoSemanal(rs.getLong("atletaplanosemanal"));
-		}
-	
-		
-		
-		
-		System.out.println(plano);
-		
 		long id = 0 ;
 		String nome = null ;
 		String cpf = null ;
@@ -146,14 +162,19 @@ public class AtletaDAO {
 		String senha = null ;
 		
 		while(rs.next()) {
+			PlanoSemanalDAO dao = new PlanoSemanalDAO();
+			plano = dao.selectPlanoSemanal(rs.getLong("atletaplanosemanal"));
+			System.out.println("entrou aq");
 			id = rs.getLong("atletaid");
 			nome = rs.getString("atletanome");
 			cpf = rs.getString("atletacpf");
 			email = rs.getString("atletaemail");
 			senha = rs.getString("atletasenha");
+			System.out.println( rs.getLong("atletaid"));
 		}
 		
 		
+		System.out.println("atleta id eh " + id);
 		Atleta atleta = new Atleta(id, nome, cpf, email, senha, plano);
 		
 		System.out.println(atleta);
