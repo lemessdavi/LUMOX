@@ -94,18 +94,21 @@ public class DiaDaSemanaDAO {
         
 		ResultSet rs = pstmt.executeQuery();
 		
-		long id = rs.getLong(0);
-		String nome = rs.getString(1);
+		DiaDaSemana dia = null;
+		while (rs.next()) {
+			long id = rs.getLong("diadasemanaid");
+			String nome = rs.getString("diadasemananome");
 		
-		PlanoAlimentarDAO planoalimentarDAO = new PlanoAlimentarDAO();
-		PlanoAlimentar planoalimentar = planoalimentarDAO.selectPlanoAlimentar(rs.getLong(2));
+			PlanoAlimentarDAO planoalimentarDAO = new PlanoAlimentarDAO();
+			PlanoAlimentar planoalimentar = planoalimentarDAO.selectPlanoAlimentar(rs.getLong("diadasemanaplanalim"));
 		
-		PlanoTreinoDAO planoTreinoDAO = new PlanoTreinoDAO();
-		PlanoTreino planoTreino = planoTreinoDAO.selectPlanoTreino(rs.getLong(3));
+			PlanoTreinoDAO planoTreinoDAO = new PlanoTreinoDAO();
+			PlanoTreino planoTreino = planoTreinoDAO.selectPlanoTreino(rs.getLong("diadasemanaplanexer"));
 		
 		
-		DiaDaSemana dia = new DiaDaSemana(id,nome, planoalimentar, planoTreino);
+			dia = new DiaDaSemana(id,nome, planoalimentar, planoTreino);
 		
+		}
 		return dia;
 	}
 	

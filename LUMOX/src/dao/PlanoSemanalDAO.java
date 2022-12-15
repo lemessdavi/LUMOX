@@ -103,15 +103,19 @@ public class PlanoSemanalDAO {
 		
 		DiaDaSemanaDAO diaDao = new DiaDaSemanaDAO();
 		
-		DiaDaSemana segunda = diaDao.selectDiaDaSemana(rs.getLong(2));
-		DiaDaSemana terca = diaDao.selectDiaDaSemana(rs.getLong(3));
-		DiaDaSemana quarta = diaDao.selectDiaDaSemana(rs.getLong(4));
-		DiaDaSemana quinta = diaDao.selectDiaDaSemana(rs.getLong(5));
-		DiaDaSemana sexta = diaDao.selectDiaDaSemana(rs.getLong(6));
-		DiaDaSemana sabado = diaDao.selectDiaDaSemana(rs.getLong(7));
-		DiaDaSemana domingo = diaDao.selectDiaDaSemana(rs.getLong(8));
+		PlanoSemanal plano = null;
 		
-		PlanoSemanal plano = new PlanoSemanal(rs.getLong(0), rs.getString(1), segunda, terca, quarta, quinta, sexta, sabado, domingo);
+		while(rs.next()) {
+		DiaDaSemana segunda = diaDao.selectDiaDaSemana(rs.getLong("segunda"));
+		DiaDaSemana terca = diaDao.selectDiaDaSemana(rs.getLong("terca"));
+		DiaDaSemana quarta = diaDao.selectDiaDaSemana(rs.getLong("quarta"));
+		DiaDaSemana quinta = diaDao.selectDiaDaSemana(rs.getLong("quinta"));
+		DiaDaSemana sexta = diaDao.selectDiaDaSemana(rs.getLong("sexta"));
+		DiaDaSemana sabado = diaDao.selectDiaDaSemana(rs.getLong("sabado"));
+		DiaDaSemana domingo = diaDao.selectDiaDaSemana(rs.getLong("domingo"));
+		
+		 plano = new PlanoSemanal(rs.getLong("planosemanalid"), rs.getString("nome"), segunda, terca, quarta, quinta, sexta, sabado, domingo);
+		}
 		return plano;
 	}
 	

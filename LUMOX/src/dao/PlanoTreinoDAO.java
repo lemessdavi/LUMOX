@@ -97,24 +97,35 @@ public class PlanoTreinoDAO {
         
 		ResultSet rs = pstmt.executeQuery();
 		
-		long id = rs.getLong("planotreino.planotreinoid");
-		String nome = rs.getString("planotreino.planotreinonome");
+		long id = 0;
+		String nome = null;
+		Personal personal = null;
 		
-		PersonalDAO personalDAO = new PersonalDAO();
-		Personal personal = personalDAO.selectPersonal(rs.getLong("planotreinopersonal"));
+		while(rs.next()) {
 		
-		ArrayList<Exercicio> exercicios = null;
+			id = rs.getLong("planotreinoid");
+			nome = rs.getString("planotreinonome");
+		
+			PersonalDAO personalDAO = new PersonalDAO();
+			personal = personalDAO.selectPersonal(rs.getLong("planotreinopersonal"));
+		
+		}
+		
+		ArrayList<Exercicio> exercicios = new ArrayList();
 		
 		List<Long> exerciciosids = new ArrayList<>();
 		
 		
-		String sql = "select exercicio.exercicioid from planotreinoxexercicio inner join planotreino on planotreinoxexercicio.planotreinoid = planotreino.planotreinoid  where planotreino.planotreinoid = ?;";
+		String sql = "select planotreinoxexercicio.exercicioid from planotreinoxexercicio inner join planotreino on planotreinoxexercicio.planotreinoid = planotreino.planotreinoid  where planotreino.planotreinoid = ?;";
 		
 		PreparedStatement stmt = connection.prepareStatement(sql);
+		
+		stmt.setLong(1, ids);
+		
 		ResultSet rs2 = stmt.executeQuery(); 
 		
-		while (rs.next()) {
-			exerciciosids.add(rs.getLong("exercicioid"));
+		while (rs2.next()) {
+			exerciciosids.add(rs2.getLong("exercicioid"));
 		}
 		
 		for (Long long1 : exerciciosids) {
@@ -123,10 +134,8 @@ public class PlanoTreinoDAO {
 			exercicios.add(exercicio);
 		}
 		    
-		    
 		
 		PlanoTreino plano = new PlanoTreino(id, nome, exercicios, personal);
-		
 		
 		
 		return plano;

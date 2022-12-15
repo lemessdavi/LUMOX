@@ -99,10 +99,15 @@ public class AlimentoDAO {
 		
 		PreparedStatement pstmt = connection.prepareStatement(query);
 		
+		pstmt.setLong(1, long2);
+		
 		ResultSet rs = pstmt.executeQuery();
 		
-		return new Alimento(rs.getLong(0), rs.getString(1), rs.getDouble(2), rs.getString(3));
-		
+		Alimento alimento = null;
+		while(rs.next()) {
+			alimento = new Alimento(rs.getLong("alimentoid"), rs.getString("alimentonome"), rs.getDouble("alimentocalorias"), rs.getString("alimentopropriedades"));
+		}
+		return alimento;
 	}
 	
 	

@@ -112,7 +112,7 @@ public class AtletaDAO {
 		
 	}
 	
-	public ResultSetMetaData createAtletaOnLogin(String login, String senha) throws SQLException {
+	public Atleta createAtletaOnLogin(String login, String senha1) throws SQLException {
 		
 
 		ConnectionFactory cFactory = new ConnectionFactory();
@@ -123,14 +123,41 @@ public class AtletaDAO {
 		PreparedStatement pstmt = connection.prepareStatement(query);
 		
 		pstmt.setString(1, login);
-        pstmt.setString(2, senha);
+        pstmt.setString(2, senha1);
         
 		ResultSet rs = pstmt.executeQuery();
 		
-		PlanoSemanalDAO dao = new PlanoSemanalDAO();
-		PlanoSemanal plano = dao.selectPlanoSemanal(rs.getLong(5));
+		PlanoSemanal plano = null;
 		
-		Atleta atleta = new Atleta(rs.getLong(0), rs.getString(1), rs.getString(2), rs.getString(3),rs.getString(4),plano);
-		return rs.getMetaData();
+		while(rs.next()) {
+			PlanoSemanalDAO dao = new PlanoSemanalDAO();
+			plano = dao.selectPlanoSemanal(rs.getLong("atletaplanosemanal"));
+		}
+	
+		
+		
+		
+		System.out.println(plano);
+		
+		long id = 0 ;
+		String nome = null ;
+		String cpf = null ;
+		String email = null ;
+		String senha = null ;
+		
+		while(rs.next()) {
+			id = rs.getLong("atletaid");
+			nome = rs.getString("atletanome");
+			cpf = rs.getString("atletacpf");
+			email = rs.getString("atletaemail");
+			senha = rs.getString("atletasenha");
+		}
+		
+		
+		Atleta atleta = new Atleta(id, nome, cpf, email, senha, plano);
+		
+		System.out.println(atleta);
+		
+		return atleta;
 	}
 }

@@ -9,7 +9,7 @@ import model.PlanoSemanal;
 
 public class AtletaCRUD {
 	Atleta modelAtleta;
-	AtletaDAO daoAtleta;
+	AtletaDAO daoAtleta = new AtletaDAO();
 		
 	public boolean cadastrarAtleta(String nome, String cpf, String login, String senha, PlanoSemanal planoSemanal) throws SQLException {
 		modelAtleta = new Atleta(nome,cpf,login,senha);
@@ -51,4 +51,16 @@ public class AtletaCRUD {
 		}
 		return null;
 	}
+
+	public Atleta verifyLogin(String login, String senha) {
+		
+		try {
+			return daoAtleta.createAtletaOnLogin(login,senha);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	
 }

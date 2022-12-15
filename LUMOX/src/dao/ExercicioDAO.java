@@ -91,13 +91,18 @@ public class ExercicioDAO {
         
 		ResultSet rs = pstmt.executeQuery();
 		
-		long id = rs.getLong("exercicioid");
-		String nome = rs.getString("exercicionome");
-		String rep = String.valueOf(rs.getInt("exerciciorepeticoes")); //mudar no banco para string, tirar o valuof daqui e dar um getString
-		String tempo = rs.getString("exerciciotempo");
-		String  instr = rs.getString("exercicioinstrucoes");
+		Exercicio exercicio = null;
 		
-		Exercicio exercicio = new Exercicio(id, nome, rep, tempo, instr);
+		while(rs.next()) {
+			long id = rs.getLong("exercicioid");
+			String nome = rs.getString("exercicionome");
+			String rep = String.valueOf(rs.getInt("exerciciorepeticoes")); //mudar no banco para string, tirar o valuof daqui e dar um getString
+			String tempo = rs.getString("exerciciotempo");
+			String  instr = rs.getString("exercicioinstrucoes");
+		
+			exercicio = new Exercicio(id, nome, rep, tempo, instr);
+		}
+		
 		return exercicio;
 	}
 }

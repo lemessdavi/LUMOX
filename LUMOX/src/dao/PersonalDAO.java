@@ -91,11 +91,51 @@ public class PersonalDAO {
         
 		ResultSet rs = pstmt.executeQuery();
 		
-		long id = rs.getLong(0);
-		String nome = rs.getString(1);
-		String cpf = rs.getString(2);
-		String email = rs.getString(3);
-		String senha = rs.getString(4);
+		long id = 0 ;
+		String nome = null ;
+		String cpf = null ;
+		String email = null ;
+		String senha = null ;
+		
+		while (rs.next()) {
+		id = rs.getLong("personalid");
+		nome = rs.getString("personalnome");
+		cpf = rs.getString("personalcpf");
+		email = rs.getString("personalemail");
+		senha = rs.getString("personalsenha");
+		}
+		
+		Personal personal = new Personal (id, nome, cpf, email, senha);
+		return personal;
+	}
+
+	public Personal createPersonalOnLogin(String login, String senha1) throws SQLException {
+		ConnectionFactory cFactory = new ConnectionFactory();
+		Connection connection = cFactory.recuperarConexao();
+		
+		String query = "select * from personal where personal.personalemail like ? and personal.personalsenha like ?;";
+		
+		PreparedStatement pstmt = connection.prepareStatement(query);
+		
+		pstmt.setString(1, login);
+		pstmt.setString(2, senha1);
+        
+		ResultSet rs = pstmt.executeQuery();
+		
+		
+		long id = 0 ;
+		String nome = null ;
+		String cpf = null ;
+		String email = null ;
+		String senha = null ;
+		
+		while(rs.next()) {
+			id = rs.getLong("personalid");
+			nome = rs.getString("personalnome");
+			cpf = rs.getString("personalcpf");
+			email = rs.getString("personalemail");
+			senha = rs.getString("personalsenha");
+		}
 		
 		Personal personal = new Personal (id, nome, cpf, email, senha);
 		

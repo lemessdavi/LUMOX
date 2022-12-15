@@ -10,11 +10,10 @@ import model.Personal;
 public class PersonalCRUD {
 	
 	private Personal personal;
-	private PersonalDAO personalDAO;
+	private PersonalDAO personalDAO = new PersonalDAO();;
 	
 	public boolean cadastrarPersonal(String nome, String cpf, String login, String senha) {
 		personal = new Personal(nome, cpf,login,senha);
-		personalDAO = new PersonalDAO();
 		try {
 			personal.setId(personalDAO.insertPersonal(personal));
 			return true;
@@ -34,5 +33,15 @@ public class PersonalCRUD {
 			e.printStackTrace();
 			return false;
 		}
+	}
+
+	public Personal verifyLogin(String login, String senha) {
+		try {
+			return personalDAO.createPersonalOnLogin(login, senha);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		};
+		return null;
 	}
 }

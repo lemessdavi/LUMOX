@@ -95,13 +95,18 @@ public class PlanoAlimentarDAO {
         
 		ResultSet rs = pstmt.executeQuery();
 		
-		long id = rs.getLong("planoalimentar.planoalimentarid");
-		String nome = rs.getString("planoalimentar.planoalimentarnome");
+		long id =0;
+		String nome = null;
+		Personal personal = null;		
+		while(rs.next()) {
+		id = rs.getLong("planoalimentarid");
+		nome = rs.getString("planoalimentarnome");
 		
 		PersonalDAO personalDAO = new PersonalDAO();
-		Personal personal = personalDAO.selectPersonal(rs.getLong("planoalimentarpersonal"));
+		personal = personalDAO.selectPersonal(rs.getLong("planoalimentarpersonal"));
+		}
 		
-		ArrayList<Alimento> alimentos = null;
+		ArrayList<Alimento> alimentos = new ArrayList();
 		
 		List<Long> alimentosids = new ArrayList<>();
 		
@@ -109,10 +114,13 @@ public class PlanoAlimentarDAO {
 		String sql = "select planoalimentarxalimento.alimentoid from planoalimentarxalimento inner join planoalimentar on planoalimentarxalimento.planoalimentarid = planoalimentar.planoalimentarid where planoalimentar.planoalimentarid = ?;";
 		
 		PreparedStatement stmt = connection.prepareStatement(sql);
+		
+		stmt.setLong(1, long1);
+		
 		ResultSet rs2 = stmt.executeQuery(); 
 		
-		while (rs.next()) {
-			alimentosids.add(rs.getLong("alimentoid"));
+		while (rs2.next()) {
+			alimentosids.add(rs2.getLong("alimentoid"));
 		}
 		
 		for (Long long2 : alimentosids) {
