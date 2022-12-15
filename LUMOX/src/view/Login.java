@@ -17,12 +17,16 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JCheckBox;
+import javax.swing.JPasswordField;
+import javax.swing.ImageIcon;
+import java.awt.Font;
+import java.awt.Color;
 
 public class Login extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textFieldLogin;
-	private JTextField textFieldSenha;
+	private JPasswordField textFieldSenha;
 
 	/**
 	 * Launch the application.
@@ -46,40 +50,46 @@ public class Login extends JFrame {
 	public Login() {
 		setTitle("Login");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 583, 377);
+		setBounds(100, 100, 715, 470);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(35, 35, 35));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		textFieldLogin = new JTextField();
-		textFieldLogin.setBounds(64, 86, 210, 28);
+		textFieldLogin.setForeground(new Color(255, 255, 255));
+		textFieldLogin.setBackground(new Color(80, 80, 80));
+		textFieldLogin.setBounds(245, 175, 210, 30);
 		contentPane.add(textFieldLogin);
 		textFieldLogin.setColumns(10);
 		
 		JLabel lblNewLabel = new JLabel("Login");
-		lblNewLabel.setBounds(64, 67, 46, 14);
+		lblNewLabel.setForeground(new Color(255, 255, 255));
+		lblNewLabel.setBounds(245, 217, 46, 14);
 		contentPane.add(lblNewLabel);
 		
-		textFieldSenha = new JTextField();
-		textFieldSenha.setColumns(10);
-		textFieldSenha.setBounds(64, 177, 210, 28);
-		contentPane.add(textFieldSenha);
-		
 		JLabel lblSenha = new JLabel("Senha");
-		lblSenha.setBounds(64, 158, 46, 14);
+		lblSenha.setForeground(new Color(255, 255, 255));
+		lblSenha.setBounds(245, 155, 46, 14);
 		contentPane.add(lblSenha);
 		
 		JButton btnCadastrase = new JButton("Cadastra-se");
-		btnCadastrase.setBounds(396, 284, 104, 23);
+		btnCadastrase.setForeground(new Color(255, 255, 255));
+		btnCadastrase.setBackground(new Color(80, 80, 80));
+		btnCadastrase.setBounds(298, 326, 104, 23);
 		contentPane.add(btnCadastrase);
 		
 		final JCheckBox chckbxPersonal = new JCheckBox("Personal");
-		chckbxPersonal.setBounds(414, 138, 97, 23);
+		chckbxPersonal.setForeground(new Color(255, 255, 255));
+		chckbxPersonal.setBackground(new Color(35, 35, 35));
+		chckbxPersonal.setBounds(313, 357, 75, 23);
 		contentPane.add(chckbxPersonal);
 		
 		JButton btnLogin = new JButton("Login");
+		btnLogin.setForeground(new Color(255, 255, 255));
+		btnLogin.setBackground(new Color(58, 164, 241));
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -109,8 +119,20 @@ public class Login extends JFrame {
 					
 			}
 		});
-		btnLogin.setBounds(117, 284, 89, 23);
+		btnLogin.setBounds(306, 291, 89, 23);
 		contentPane.add(btnLogin);
+		
+		textFieldSenha = new JPasswordField();
+		textFieldSenha.setForeground(new Color(255, 255, 255));
+		textFieldSenha.setBackground(new Color(80, 80, 80));
+		textFieldSenha.setBounds(245, 236, 210, 30);
+		contentPane.add(textFieldSenha);
+		
+		JLabel lblNewLabel_1 = new JLabel("LUMOX");
+		lblNewLabel_1.setForeground(new Color(255, 255, 255));
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 31));
+		lblNewLabel_1.setBounds(298, 105, 104, 38);
+		contentPane.add(lblNewLabel_1);
 		
 	
 	}
