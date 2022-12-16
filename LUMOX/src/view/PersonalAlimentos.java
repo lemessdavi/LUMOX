@@ -26,11 +26,11 @@ public class PersonalAlimentos extends JFrame {
 		contentPane.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 27, 437, 358);
+		scrollPane.setBounds(10, 27, 493, 358);
 		contentPane.add(scrollPane);
 		
 		JButton btnNewButton = new JButton("New button");
-		btnNewButton.setBounds(496, 339, 89, 23);
+		btnNewButton.setBounds(524, 348, 89, 23);
 		contentPane.add(btnNewButton);
 	}
 
