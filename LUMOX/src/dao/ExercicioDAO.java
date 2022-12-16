@@ -3,6 +3,7 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -104,5 +105,36 @@ public class ExercicioDAO {
 		}
 		
 		return exercicio;
+	}
+
+	public ResultSetMetaData selectAllExerciciosModel() throws SQLException {
+
+		ConnectionFactory cFactory = new ConnectionFactory();
+		Connection connection = cFactory.recuperarConexao();
+		
+		String query = "select * from exercicio;";
+		
+		PreparedStatement pstmt = connection.prepareStatement(query);
+        
+		ResultSet rs = pstmt.executeQuery();
+		
+		ResultSetMetaData rsmd= rs.getMetaData();
+		
+		return rsmd;
+	}
+	
+	public ResultSet selectAllExerciciosContent() throws SQLException {
+
+		ConnectionFactory cFactory = new ConnectionFactory();
+		Connection connection = cFactory.recuperarConexao();
+		
+		String query = "select * from exercicio;";
+		
+		PreparedStatement pstmt = connection.prepareStatement(query);
+        
+		ResultSet rs = pstmt.executeQuery();
+		
+		
+		return rs;
 	}
 }

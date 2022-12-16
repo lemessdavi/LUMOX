@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import javax.swing.table.*;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.Vector;
 
 import dao.AtletaDAO;
 import model.Atleta;
@@ -36,7 +37,7 @@ public class AtletaCRUD {
 		}
 	}
 	
-	public String[] selectJTableModel(String dia, Atleta atleta) {
+	public String[] selectJTableModelAlimento(String dia, Atleta atleta) {
 		
 		try {
 			ResultSetMetaData rsmd = daoAtleta.selectAlimentosDoDiaModel(atleta,dia);
@@ -64,9 +65,40 @@ public class AtletaCRUD {
 		return null;
 	}
 	
-	public ResultSet selectJtableContents(String dia, Atleta atleta) {
+	public ResultSet selectJtableContentsAlimento(String dia, Atleta atleta) {
 		try {
 			ResultSet rs = daoAtleta.selectAlimentosDoDiaContent(atleta,dia);
+			
+			return rs;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public String[] selectJTableModelTreino(String dia, Atleta atleta) {
+		try {
+			ResultSetMetaData rsmd = daoAtleta.selectExerciciosDoDiaModel(atleta,dia);
+			int cols = rsmd.getColumnCount();
+			String[] colName =  new String[cols];
+			
+			for (int i = 0; i < cols; i++) {
+				colName[i] = rsmd.getColumnName(i+1);
+			}
+			
+			return colName;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public ResultSet selectJtableContentsTreino(String dia, Atleta atleta) {
+		
+		
+		try {
+			ResultSet rs = daoAtleta.selectExerciciosDoDiaContent(atleta,dia);
 			
 			return rs;
 			
