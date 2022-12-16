@@ -16,13 +16,12 @@ import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.Font;
+import javax.swing.JComboBox;
 
-public class CadastroAlimento extends JFrame {
+public class AlterarPlanoAlimentos extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textFieldNome;
-	private JTextField textFieldCalorias;
-	private JTextField textFieldPropriedades;
 	private AlimentoCRUD alimentoController = new AlimentoCRUD();
 
 	/**
@@ -32,7 +31,7 @@ public class CadastroAlimento extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CadastroAlimento frame = new CadastroAlimento();
+					AlterarPlanoAlimentos frame = new AlterarPlanoAlimentos();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -44,10 +43,10 @@ public class CadastroAlimento extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public CadastroAlimento() {
-		setTitle("Alterar Alimento");
+	public AlterarPlanoAlimentos() {
+		setTitle("Alterar Plano de Alimentos\r\n");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 454, 337);
+		setBounds(100, 100, 454, 346);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(44, 44, 44));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -68,37 +67,18 @@ public class CadastroAlimento extends JFrame {
 		lblNome.setBounds(28, 59, 46, 14);
 		contentPane.add(lblNome);
 		
-		JLabel lblCalorias = new JLabel("Calorias:");
+		JLabel lblCalorias = new JLabel("Alimentos - Manhã");
 		lblCalorias.setForeground(new Color(255, 255, 255));
-		lblCalorias.setBounds(28, 106, 91, 14);
+		lblCalorias.setBounds(28, 106, 161, 14);
 		contentPane.add(lblCalorias);
 		
-		textFieldCalorias = new JTextField();
-		textFieldCalorias.setForeground(new Color(255, 255, 255));
-		textFieldCalorias.setBackground(new Color(76, 76, 76));
-		textFieldCalorias.setColumns(10);
-		textFieldCalorias.setBounds(28, 123, 180, 20);
-		contentPane.add(textFieldCalorias);
-		
-		JLabel lblPropriedades = new JLabel("Propriedades:");
-		lblPropriedades.setForeground(new Color(255, 255, 255));
-		lblPropriedades.setBounds(28, 152, 113, 14);
-		contentPane.add(lblPropriedades);
-		
-		textFieldPropriedades = new JTextField();
-		textFieldPropriedades.setForeground(new Color(255, 255, 255));
-		textFieldPropriedades.setBackground(new Color(76, 76, 76));
-		textFieldPropriedades.setColumns(10);
-		textFieldPropriedades.setBounds(28, 169, 381, 68);
-		contentPane.add(textFieldPropriedades);
-		
-		JButton btnCadastrar = new JButton("Confirmar");
-		btnCadastrar.setForeground(new Color(255, 255, 255));
-		btnCadastrar.setBackground(new Color(20, 167, 245));
-		btnCadastrar.addActionListener(new ActionListener() {
+		JButton btnConfirmar = new JButton("Confirmar");
+		btnConfirmar.setForeground(new Color(255, 255, 255));
+		btnConfirmar.setBackground(new Color(20, 167, 245));
+		btnConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					if(alimentoController.cadastrarAlimento(textFieldNome.getText(), Integer.parseInt(textFieldCalorias.getText()) , textFieldPropriedades.getText())) {
+					if(alimentoController.cadastrarAlimento(textFieldNome.getText(), Integer.parseInt(textFieldRepeticoes.getText()) , textFieldInstrucoes.getText())) {
 						PopUp telaOk = new PopUp("Cadastro Realizado");
 						telaOk.show(true);
 					}else {
@@ -111,14 +91,41 @@ public class CadastroAlimento extends JFrame {
 				}
 			}
 		});
-		btnCadastrar.setBounds(163, 257, 113, 23);
-		contentPane.add(btnCadastrar);
+		btnConfirmar.setBounds(135, 267, 169, 23);
+		contentPane.add(btnConfirmar);
 		
-		JLabel lblNewLabel = new JLabel("Alterar Alimento");
+		JLabel lblNewLabel = new JLabel("Alterar Plano de Alimentos");
 		lblNewLabel.setFont(new Font("Dialog", Font.BOLD, 15));
 		lblNewLabel.setForeground(new Color(255, 255, 255));
-		lblNewLabel.setBounds(143, 10, 150, 36);
+		lblNewLabel.setBounds(115, 10, 210, 36);
 		contentPane.add(lblNewLabel);
+		
+		JLabel lblTempo = new JLabel("Alimentos - Tarde");
+		lblTempo.setForeground(Color.WHITE);
+		lblTempo.setBounds(28, 156, 180, 14);
+		contentPane.add(lblTempo);
+		
+		JLabel lblAlimentosNoite = new JLabel("Alimentos - Noite");
+		lblAlimentosNoite.setForeground(Color.WHITE);
+		lblAlimentosNoite.setBounds(28, 205, 180, 14);
+		contentPane.add(lblAlimentosNoite);
+		
+		JComboBox cbAlimentoManha = new JComboBox();
+		cbAlimentoManha.setBackground(new Color(76, 76, 76));
+		cbAlimentoManha.setForeground(new Color(255, 255, 255));
+		cbAlimentoManha.setBounds(28, 122, 180, 20);
+		contentPane.add(cbAlimentoManha);
+		
+		JComboBox cbAlimentoTarde = new JComboBox();
+		cbAlimentoTarde.setForeground(Color.WHITE);
+		cbAlimentoTarde.setBackground(new Color(76, 76, 76));
+		cbAlimentoTarde.setBounds(28, 173, 180, 20);
+		contentPane.add(cbAlimentoTarde);
+		
+		JComboBox cbAlimentoNoite = new JComboBox();
+		cbAlimentoNoite.setForeground(Color.WHITE);
+		cbAlimentoNoite.setBackground(new Color(76, 76, 76));
+		cbAlimentoNoite.setBounds(28, 225, 180, 20);
+		contentPane.add(cbAlimentoNoite);
 	}
-
 }

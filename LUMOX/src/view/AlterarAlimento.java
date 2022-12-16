@@ -17,7 +17,7 @@ import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.Font;
 
-public class CadastroAlimento extends JFrame {
+public class AlterarAlimento extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textFieldNome;
@@ -32,7 +32,7 @@ public class CadastroAlimento extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CadastroAlimento frame = new CadastroAlimento();
+					AlterarAlimento frame = new AlterarAlimento();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -44,8 +44,8 @@ public class CadastroAlimento extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public CadastroAlimento() {
-		setTitle("Alterar Alimento");
+	public AlterarAlimento() {
+		setTitle("Cadastro de Alimento");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 454, 337);
 		contentPane = new JPanel();
@@ -92,7 +92,7 @@ public class CadastroAlimento extends JFrame {
 		textFieldPropriedades.setBounds(28, 169, 381, 68);
 		contentPane.add(textFieldPropriedades);
 		
-		JButton btnCadastrar = new JButton("Confirmar");
+		JButton btnCadastrar = new JButton("Cadastrar");
 		btnCadastrar.setForeground(new Color(255, 255, 255));
 		btnCadastrar.setBackground(new Color(20, 167, 245));
 		btnCadastrar.addActionListener(new ActionListener() {
@@ -114,7 +114,7 @@ public class CadastroAlimento extends JFrame {
 		btnCadastrar.setBounds(163, 257, 113, 23);
 		contentPane.add(btnCadastrar);
 		
-		JLabel lblNewLabel = new JLabel("Alterar Alimento");
+		JLabel lblNewLabel = new JLabel("Cadastrar Alimento");
 		lblNewLabel.setFont(new Font("Dialog", Font.BOLD, 15));
 		lblNewLabel.setForeground(new Color(255, 255, 255));
 		lblNewLabel.setBounds(143, 10, 150, 36);
