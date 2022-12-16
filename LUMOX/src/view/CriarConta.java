@@ -8,18 +8,24 @@ import java.awt.BorderLayout;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.Font;
+import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JPasswordField;
 
 public class CriarConta {
 
 	private JFrame frame;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
-	private JTextField textField_6;
-	private JTextField textField_7;
+	private JTextField tfNome;
+	private JTextField tfCpf;
+	private JTextField tfEmail;
+	private JTextField tfSenha;
+	private JTextField tfSobrenome;
+	private JTextField tfDataNascimento;
+	private JTextField tfConfEmail;
+	private JTextField tfConfSenha;
+	private JPasswordField passwordField;
 
 	/**
 	 * Launch the application.
@@ -49,100 +55,140 @@ public class CriarConta {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.getContentPane().setBackground(new Color(44, 44, 44));
 		frame.setBounds(100, 100, 715, 470);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("LUMOX");
-		lblNewLabel.setBounds(191, 17, 46, 13);
-		frame.getContentPane().add(lblNewLabel);
-		
 		JComboBox cbEscolheFuncao = new JComboBox();
-		cbEscolheFuncao.setBounds(200, 63, 29, 21);
+		cbEscolheFuncao.setForeground(new Color(255, 255, 255));
+		cbEscolheFuncao.setBackground(new Color(76, 76, 76));
+		cbEscolheFuncao.setBounds(336, 120, 29, 21);
 		frame.getContentPane().add(cbEscolheFuncao);
 		
 		JLabel lblNewLabel_1 = new JLabel("Crie uma nova conta");
-		lblNewLabel_1.setBounds(146, 40, 105, 13);
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblNewLabel_1.setForeground(new Color(255, 255, 255));
+		lblNewLabel_1.setBounds(268, 90, 166, 17);
 		frame.getContentPane().add(lblNewLabel_1);
 		
-		textField = new JTextField();
-		textField.setBounds(25, 92, 96, 19);
-		frame.getContentPane().add(textField);
-		textField.setColumns(10);
-		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(25, 121, 96, 19);
-		frame.getContentPane().add(textField_1);
-		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(25, 153, 96, 19);
-		frame.getContentPane().add(textField_2);
-		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(25, 182, 96, 19);
-		frame.getContentPane().add(textField_3);
-		
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		textField_4.setBounds(298, 92, 96, 19);
-		frame.getContentPane().add(textField_4);
-		
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
-		textField_5.setBounds(298, 121, 96, 19);
-		frame.getContentPane().add(textField_5);
-		
-		textField_6 = new JTextField();
-		textField_6.setColumns(10);
-		textField_6.setBounds(298, 153, 96, 19);
-		frame.getContentPane().add(textField_6);
-		
-		textField_7 = new JTextField();
-		textField_7.setColumns(10);
-		textField_7.setBounds(298, 182, 96, 19);
-		frame.getContentPane().add(textField_7);
+		tfNome = new JTextField();
+		tfNome.setBackground(new Color(76, 76, 76));
+		tfNome.setForeground(new Color(255, 255, 255));
+		tfNome.setBounds(12, 141, 241, 26);
+		frame.getContentPane().add(tfNome);
+		tfNome.setColumns(10);
 		
 		JLabel lblNewLabel_1_1 = new JLabel("Nome");
-		lblNewLabel_1_1.setBounds(25, 67, 105, 13);
+		lblNewLabel_1_1.setForeground(new Color(255, 255, 255));
+		lblNewLabel_1_1.setBounds(12, 120, 105, 13);
 		frame.getContentPane().add(lblNewLabel_1_1);
 		
 		JLabel lblNewLabel_1_2 = new JLabel("CPF");
-		lblNewLabel_1_2.setBounds(25, 110, 105, 13);
+		lblNewLabel_1_2.setForeground(new Color(255, 255, 255));
+		lblNewLabel_1_2.setBounds(12, 179, 105, 13);
 		frame.getContentPane().add(lblNewLabel_1_2);
 		
 		JLabel lblNewLabel_1_3 = new JLabel("E-mail");
-		lblNewLabel_1_3.setBounds(25, 144, 105, 13);
+		lblNewLabel_1_3.setForeground(new Color(255, 255, 255));
+		lblNewLabel_1_3.setBounds(12, 239, 105, 13);
 		frame.getContentPane().add(lblNewLabel_1_3);
 		
 		JLabel lblNewLabel_1_4 = new JLabel("Senha");
-		lblNewLabel_1_4.setBounds(25, 167, 105, 13);
+		lblNewLabel_1_4.setForeground(new Color(255, 255, 255));
+		lblNewLabel_1_4.setBounds(12, 302, 105, 13);
 		frame.getContentPane().add(lblNewLabel_1_4);
 		
 		JLabel lblNewLabel_1_5 = new JLabel("Sobrenome");
-		lblNewLabel_1_5.setBounds(289, 67, 105, 13);
+		lblNewLabel_1_5.setForeground(new Color(255, 255, 255));
+		lblNewLabel_1_5.setBounds(448, 120, 75, 13);
 		frame.getContentPane().add(lblNewLabel_1_5);
 		
 		JLabel lblNewLabel_1_6 = new JLabel("Data de Nascimento");
-		lblNewLabel_1_6.setBounds(289, 110, 105, 13);
+		lblNewLabel_1_6.setForeground(new Color(255, 255, 255));
+		lblNewLabel_1_6.setBounds(448, 179, 143, 13);
 		frame.getContentPane().add(lblNewLabel_1_6);
 		
 		JLabel lblNewLabel_1_7 = new JLabel("Confirmar e-mail");
-		lblNewLabel_1_7.setBounds(289, 144, 105, 13);
+		lblNewLabel_1_7.setForeground(new Color(255, 255, 255));
+		lblNewLabel_1_7.setBounds(448, 239, 105, 13);
 		frame.getContentPane().add(lblNewLabel_1_7);
 		
 		JLabel lblNewLabel_1_8 = new JLabel("Confirmar senha");
-		lblNewLabel_1_8.setBounds(289, 167, 105, 13);
+		lblNewLabel_1_8.setForeground(new Color(255, 255, 255));
+		lblNewLabel_1_8.setBounds(448, 302, 105, 13);
 		frame.getContentPane().add(lblNewLabel_1_8);
 		
 		JButton btnCriarConta = new JButton("Criar Conta");
-		btnCriarConta.setBounds(166, 202, 85, 21);
+		btnCriarConta.setBackground(new Color(20, 167, 245));
+		btnCriarConta.setForeground(new Color(255, 255, 255));
+		btnCriarConta.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnCriarConta.setBounds(308, 367, 105, 21);
 		frame.getContentPane().add(btnCriarConta);
 		
 		JButton btnVoltar = new JButton("Voltar");
-		btnVoltar.setBounds(166, 232, 85, 21);
+		btnVoltar.setBackground(new Color(76, 76, 76));
+		btnVoltar.setForeground(new Color(255, 255, 255));
+		btnVoltar.setBounds(308, 400, 105, 21);
 		frame.getContentPane().add(btnVoltar);
+		
+		JLabel lblNewLabel_1_9 = new JLabel("LUMOX");
+		lblNewLabel_1_9.setForeground(Color.WHITE);
+		lblNewLabel_1_9.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblNewLabel_1_9.setBounds(318, 46, 70, 38);
+		frame.getContentPane().add(lblNewLabel_1_9);
+		
+		tfCpf = new JTextField();
+		tfCpf.setBackground(new Color(76, 76, 76));
+		tfCpf.setForeground(new Color(255, 255, 255));
+		tfCpf.setColumns(10);
+		tfCpf.setBounds(12, 201, 241, 26);
+		frame.getContentPane().add(tfCpf);
+		
+		tfEmail = new JTextField();
+		tfEmail.setBackground(new Color(76, 76, 76));
+		tfEmail.setForeground(new Color(255, 255, 255));
+		tfEmail.setColumns(10);
+		tfEmail.setBounds(12, 264, 241, 26);
+		frame.getContentPane().add(tfEmail);
+		
+		tfSenha = new JPasswordField();
+		tfSenha.setBackground(new Color(76, 76, 76));
+		tfSenha.setForeground(new Color(255, 255, 255));
+		tfSenha.setColumns(10);
+		tfSenha.setBounds(12, 327, 241, 26);
+		frame.getContentPane().add(tfSenha);
+		
+		tfSobrenome = new JTextField();
+		tfSobrenome.setBackground(new Color(76, 76, 76));
+		tfSobrenome.setForeground(new Color(255, 255, 255));
+		tfSobrenome.setColumns(10);
+		tfSobrenome.setBounds(448, 141, 241, 26);
+		frame.getContentPane().add(tfSobrenome);
+		
+		tfDataNascimento = new JTextField();
+		tfDataNascimento.setBackground(new Color(76, 76, 76));
+		tfDataNascimento.setForeground(new Color(255, 255, 255));
+		tfDataNascimento.setColumns(10);
+		tfDataNascimento.setBounds(448, 201, 241, 26);
+		frame.getContentPane().add(tfDataNascimento);
+		
+		tfConfEmail = new JTextField();
+		tfConfEmail.setBackground(new Color(76, 76, 76));
+		tfConfEmail.setForeground(new Color(255, 255, 255));
+		tfConfEmail.setColumns(10);
+		tfConfEmail.setBounds(448, 264, 241, 26);
+		frame.getContentPane().add(tfConfEmail);
+		
+		tfConfSenha = new JPasswordField();
+		tfConfSenha.setBackground(new Color(76, 76, 76));
+		tfConfSenha.setForeground(new Color(255, 255, 255));
+		tfConfSenha.setColumns(10);
+		tfConfSenha.setBounds(448, 328, 241, 26);
+		frame.getContentPane().add(tfConfSenha);
+	
 	}
 }
