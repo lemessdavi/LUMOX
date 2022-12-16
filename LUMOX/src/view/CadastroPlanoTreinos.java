@@ -36,7 +36,7 @@ public class CadastroPlanoTreinos extends JFrame {
 		personal = p;
 		setTitle("Cadastro de Plano de Treino");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 454, 247);
+		setBounds(100, 100, 454, 355);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(44, 44, 44));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -83,7 +83,7 @@ public class CadastroPlanoTreinos extends JFrame {
 				}
 			}
 		});
-		btnCadastrar.setBounds(137, 169, 169, 23);
+		btnCadastrar.setBounds(135, 283, 169, 23);
 		contentPane.add(btnCadastrar);
 		
 		JLabel lblNewLabel = new JLabel("Cadastrar Plano de Treinos");
@@ -108,7 +108,7 @@ public class CadastroPlanoTreinos extends JFrame {
 		});
 		btnCadastrar_1.setForeground(Color.WHITE);
 		btnCadastrar_1.setBackground(new Color(20, 167, 245));
-		btnCadastrar_1.setBounds(218, 121, 46, 23);
+		btnCadastrar_1.setBounds(220, 122, 46, 20);
 		contentPane.add(btnCadastrar_1);
 	}
 }

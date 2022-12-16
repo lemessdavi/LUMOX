@@ -105,6 +105,8 @@ public class AlterarAlimento extends JFrame {
 		ArrayList<Alimento> alimentos = alimentoController.selectAllAlimentosToArray();
 				
 		final JComboBox comboBox = new JComboBox(alimentos.toArray());
+		comboBox.setBackground(new Color(75, 75, 75));
+		comboBox.setForeground(new Color(255, 255, 255));
 		comboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				alimento = (Alimento) comboBox.getSelectedItem();
@@ -113,12 +115,12 @@ public class AlterarAlimento extends JFrame {
 				textFieldNome.setText(alimento.getNome());
 			}
 		});
-		comboBox.setBounds(263, 75, 146, 22);
+		comboBox.setBounds(229, 76, 180, 20);
 		contentPane.add(comboBox);
 		
 		JLabel lblAlimento = new JLabel("Alimento:");
 		lblAlimento.setForeground(Color.WHITE);
-		lblAlimento.setBounds(263, 59, 91, 14);
+		lblAlimento.setBounds(229, 59, 91, 14);
 		contentPane.add(lblAlimento);
 		
 		

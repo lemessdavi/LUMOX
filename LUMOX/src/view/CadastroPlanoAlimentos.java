@@ -110,7 +110,7 @@ public class CadastroPlanoAlimentos extends JFrame {
 		});
 		btnCadastrar_1.setForeground(Color.WHITE);
 		btnCadastrar_1.setBackground(new Color(20, 167, 245));
-		btnCadastrar_1.setBounds(218, 121, 46, 23);
+		btnCadastrar_1.setBounds(220, 122, 46, 20);
 		contentPane.add(btnCadastrar_1);
 	}
 }

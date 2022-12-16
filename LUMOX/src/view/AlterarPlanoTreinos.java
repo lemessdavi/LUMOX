@@ -39,7 +39,7 @@ public class AlterarPlanoTreinos extends JFrame {
 		personal = p;
 		setTitle("Alterar Plano de Treino");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 454, 247);
+		setBounds(100, 100, 454, 327);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(44, 44, 44));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -106,7 +106,7 @@ public class AlterarPlanoTreinos extends JFrame {
 		});
 		btnConfirmar_1.setForeground(Color.WHITE);
 		btnConfirmar_1.setBackground(new Color(20, 167, 245));
-		btnConfirmar_1.setBounds(217, 121, 41, 23);
+		btnConfirmar_1.setBounds(217, 121, 41, 20);
 		contentPane.add(btnConfirmar_1);
 		
 		
@@ -133,7 +133,7 @@ public class AlterarPlanoTreinos extends JFrame {
 				}
 			}
 		});
-		btnConfirmar.setBounds(137, 169, 169, 23);
+		btnConfirmar.setBounds(135, 255, 169, 23);
 		contentPane.add(btnConfirmar);
 		
 		

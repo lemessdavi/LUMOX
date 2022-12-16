@@ -128,6 +128,7 @@ public class AlterarPlanoAlimentos extends JFrame {
 		contentPane.add(btnConfirmar);
 		
 		JButton btnConfirmar_1 = new JButton("+");
+		btnConfirmar_1.setFont(new Font("Dialog", Font.BOLD, 10));
 		btnConfirmar_1.setToolTipText("");
 		btnConfirmar_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -136,7 +137,7 @@ public class AlterarPlanoAlimentos extends JFrame {
 		});
 		btnConfirmar_1.setForeground(Color.WHITE);
 		btnConfirmar_1.setBackground(new Color(20, 167, 245));
-		btnConfirmar_1.setBounds(218, 121, 41, 23);
+		btnConfirmar_1.setBounds(220, 123, 40, 20);
 		contentPane.add(btnConfirmar_1);
 		
 	}
