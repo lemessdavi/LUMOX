@@ -7,15 +7,19 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import controller.AlimentoCRUD;
+import controller.ExercicioCRUD;
+import model.Exercicio;
 
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.Font;
+import javax.swing.JComboBox;
 
 public class AlterarExercicio extends JFrame {
 
@@ -25,26 +29,10 @@ public class AlterarExercicio extends JFrame {
 	private JTextField textFieldInstrucoes;
 	private AlimentoCRUD alimentoController = new AlimentoCRUD();
 	private JTextField textFieldTempo;
+	private ExercicioCRUD crudExercicio = new ExercicioCRUD();
+	private Exercicio ex = null;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					AlterarExercicio frame = new AlterarExercicio();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
+	
 	public AlterarExercicio() {
 		setTitle("Alterar Exercício");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -93,28 +81,7 @@ public class AlterarExercicio extends JFrame {
 		textFieldInstrucoes.setBounds(28, 230, 381, 68);
 		contentPane.add(textFieldInstrucoes);
 		
-		JButton btnConfirmar = new JButton("Confirmar");
-		btnConfirmar.setForeground(new Color(255, 255, 255));
-		btnConfirmar.setBackground(new Color(20, 167, 245));
-		btnConfirmar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				try {
-					if(alimentoController.cadastrarAlimento(textFieldNome.getText(), Integer.parseInt(textFieldRepeticoes.getText()) , textFieldInstrucoes.getText())) {
-						PopUp telaOk = new PopUp("Cadastro Realizado");
-						telaOk.show(true);
-					}else {
-						PopUp telaErro = new PopUp("Erro, Cadastro Não Realizado");
-					telaErro.show(true);
-					}
-				} catch (NumberFormatException | SQLException e1) {
-					PopUp telaErro = new PopUp("Erro, Cadastro Não Realizado");
-					telaErro.show(true);
-				}
-			}
-		});
-		btnConfirmar.setBounds(132, 317, 169, 23);
-		contentPane.add(btnConfirmar);
-		
+
 		JLabel lblNewLabel = new JLabel("Alterar Exercício");
 		lblNewLabel.setFont(new Font("Dialog", Font.BOLD, 15));
 		lblNewLabel.setForeground(new Color(255, 255, 255));
@@ -132,6 +99,49 @@ public class AlterarExercicio extends JFrame {
 		lblTempo.setForeground(Color.WHITE);
 		lblTempo.setBounds(28, 155, 91, 14);
 		contentPane.add(lblTempo);
+		
+		
+		ArrayList<Exercicio> exercicios = crudExercicio.selectAllExerciciosToArray();
+		final JComboBox comboBox = new JComboBox(exercicios.toArray());
+		comboBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ex = (Exercicio) comboBox.getSelectedItem();
+				textFieldNome.setText(ex.getNome());
+				textFieldRepeticoes.setText(ex.getRepeticoes());
+				textFieldInstrucoes.setText(ex.getInstrucoes());
+				textFieldTempo.setText(ex.getTempo());
+			}
+		});
+		comboBox.setBounds(286, 75, 123, 22);
+		contentPane.add(comboBox);
+		
+		JLabel lblExercicios = new JLabel("Exercicios:");
+		lblExercicios.setForeground(Color.WHITE);
+		lblExercicios.setBounds(286, 59, 67, 14);
+		contentPane.add(lblExercicios);
+		
+		JButton btnConfirmar = new JButton("Confirmar");
+		btnConfirmar.setForeground(new Color(255, 255, 255));
+		btnConfirmar.setBackground(new Color(20, 167, 245));
+		btnConfirmar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					if(crudExercicio.updateExercicio(ex.getId(),textFieldNome.getText(),textFieldRepeticoes.getText() ,textFieldTempo.getText(),textFieldInstrucoes.getText())) {
+						PopUp telaOk = new PopUp("Cadastro Realizado");
+						telaOk.show(true);
+					}else {
+						PopUp telaErro = new PopUp("Erro, Cadastro Não Realizado");
+					telaErro.show(true);
+					}
+				} catch (NumberFormatException e1) {
+					PopUp telaErro = new PopUp("Erro, Cadastro Não Realizado");
+					telaErro.show(true);
+				}
+			}
+		});
+		btnConfirmar.setBounds(132, 317, 169, 23);
+		contentPane.add(btnConfirmar);
+		
 	}
 
 }

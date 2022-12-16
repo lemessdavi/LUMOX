@@ -96,7 +96,7 @@ public class PlanoAlimentarDAO {
 		
 		String  SQL = "update planoalimentar "
 				+ "set planoalimentarnome = ?"
-				+ ",planoalimentarpersonal = ?"
+				+ ",planoalimentarpersonal = ? "
 				+ " where planoalimentarid = ?;" ;
 		
 

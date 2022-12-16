@@ -205,7 +205,7 @@ public class HomePersonal extends JFrame {
 		btnCadastrarAtleta.setBackground(new Color(20, 167, 245));
 		btnCadastrarAtleta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				CadastrarAtleta tela = new CadastrarAtleta();
+				CadastrarAtletaCerto tela = new CadastrarAtletaCerto();
 				tela.show();
 			}
 		});

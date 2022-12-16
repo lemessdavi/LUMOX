@@ -28,7 +28,7 @@ public class ExercicioDAO {
                 Statement.RETURN_GENERATED_KEYS)) {
 
             pstmt.setString(1, exercicio.getNome());
-            pstmt.setString(2, exercicio.getRepeticoes());
+            pstmt.setInt(2, Integer.valueOf(exercicio.getRepeticoes()));
             pstmt.setString(3, exercicio.getTempo());
             pstmt.setString(4, exercicio.getInstrucoes());
 
@@ -59,14 +59,14 @@ public class ExercicioDAO {
 				+ "set exercicionome = ?"
 				+ ", exerciciorepeticoes = ?"
 				+ ", exerciciotempo = ?"
-				+ ", exercicioinstrucoes = ?"
+				+ ", exercicioinstrucoes = ? "
 				+ "where exercicioid = ?;";
 		
         try (
                 PreparedStatement pstmt = connection.prepareStatement(SQL)) {
 
             pstmt.setString(1, exercicio.getNome());
-            pstmt.setString(2, exercicio.getRepeticoes());
+            pstmt.setInt(2, Integer.valueOf(exercicio.getRepeticoes()));
             pstmt.setString(3, exercicio.getTempo());
             pstmt.setString(4, exercicio.getInstrucoes());
             pstmt.setLong(5, exercicio.getId());

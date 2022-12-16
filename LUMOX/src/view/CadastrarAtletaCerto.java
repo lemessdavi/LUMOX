@@ -7,12 +7,17 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import controller.AlimentoCRUD;
+import controller.AtletaCRUD;
+import controller.PersonalCRUD;
+import controller.PlanoSemanalCRUD;
+import model.PlanoSemanal;
 
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.Font;
@@ -27,25 +32,7 @@ public class CadastrarAtletaCerto extends JFrame {
 	private JTextField tfCpf;
 	private JTextField tfSenha;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					CadastrarAtletaCerto frame = new CadastrarAtletaCerto();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
-	/**
-	 * Create the frame.
-	 */
 	public CadastrarAtletaCerto() {
 		setTitle("Cadastro de Atleta");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -99,17 +86,6 @@ public class CadastrarAtletaCerto extends JFrame {
 		btnVoltar.setBackground(new Color(76, 76, 76));
 		btnVoltar.setForeground(new Color(255, 255, 255));
 		contentPane.add(btnVoltar);
-		
-		JButton btnCriarConta = new JButton("Criar Conta");
-		btnCriarConta.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnCriarConta.setBounds(298, 307, 105, 21);
-		btnCriarConta.setBackground(new Color(20, 167, 245));
-		btnCriarConta.setForeground(new Color(255, 255, 255));
-		contentPane.add(btnCriarConta);
-		
 		tfNome = new JTextField();
 		tfNome.setBounds(29, 191, 241, 26);
 		tfNome.setBackground(new Color(76, 76, 76));
@@ -138,11 +114,38 @@ public class CadastrarAtletaCerto extends JFrame {
 		tfSenha.setBounds(419, 258, 241, 26);
 		contentPane.add(tfSenha);
 		
-		JComboBox comboBox = new JComboBox();
+		PlanoSemanalCRUD crudSemanal = new PlanoSemanalCRUD();
+        ArrayList<PlanoSemanal> planos = crudSemanal.selectAllPlanosToArray();
+		final JComboBox comboBox = new JComboBox(planos.toArray());
 		comboBox.setForeground(new Color(255, 255, 255));
 		comboBox.setBackground(new Color(76, 76, 76));
 		comboBox.setBounds(278, 136, 145, 22);
 		contentPane.add(comboBox);
+		
+		JButton btnCriarConta = new JButton("Criar Conta");
+		btnCriarConta.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AtletaCRUD crudAtelta = new AtletaCRUD();
+                try {
+                    if(crudAtelta.cadastrarAtleta(tfNome.getText(), tfCpf.getText(), tfEmail.getText(), tfSenha.getText(), (PlanoSemanal) comboBox.getSelectedItem())) {
+                        PopUp telaOk = new PopUp("Cadastro Realizado");
+                        telaOk.show(true);
+                    }else {
+                        PopUp telaErro = new PopUp("Erro, Cadastro Não Realizado");
+                        telaErro.show(true);
+                    }
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
+                }
+			}
+            
+        });
+		btnCriarConta.setBounds(298, 307, 105, 21);
+		btnCriarConta.setBackground(new Color(20, 167, 245));
+		btnCriarConta.setForeground(new Color(255, 255, 255));
+		contentPane.add(btnCriarConta);
+		
+		
 		
 		
 		

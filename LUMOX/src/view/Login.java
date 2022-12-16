@@ -78,7 +78,7 @@ public class Login extends JFrame {
 		JButton btnCadastrase = new JButton("Cadastra-se");
 		btnCadastrase.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				CriarConta tela = new CriarConta();
+				CadastrarPersonal tela = new CadastrarPersonal();
 				tela.show();
 			}
 		});
