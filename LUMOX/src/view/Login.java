@@ -65,6 +65,7 @@ public class Login extends JFrame {
 		contentPane.add(textFieldLogin);
 		textFieldLogin.setColumns(10);
 		
+		
 		JLabel lblNewLabel = new JLabel("Login");
 		lblNewLabel.setForeground(new Color(255, 255, 255));
 		lblNewLabel.setBounds(245, 217, 46, 14);
