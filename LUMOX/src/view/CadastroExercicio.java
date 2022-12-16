@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import controller.AlimentoCRUD;
+import controller.ExercicioCRUD;
 
 import javax.swing.JTextField;
 import javax.swing.JLabel;
@@ -23,7 +24,7 @@ public class CadastroExercicio extends JFrame {
 	private JTextField textFieldNome;
 	private JTextField textFieldRepeticoes;
 	private JTextField textFieldInstrucoes;
-	private AlimentoCRUD alimentoController = new AlimentoCRUD();
+	private ExercicioCRUD crud = new ExercicioCRUD();
 	private JTextField textFieldTempo;
 
 	/**
@@ -99,14 +100,14 @@ public class CadastroExercicio extends JFrame {
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					if(alimentoController.cadastrarAlimento(textFieldNome.getText(), Integer.parseInt(textFieldRepeticoes.getText()) , textFieldInstrucoes.getText())) {
+					if(crud.cadastrarExercicio(textFieldNome.getText(), textFieldRepeticoes.getText() , textFieldTempo.getText(),textFieldInstrucoes.getText())) {
 						PopUp telaOk = new PopUp("Cadastro Realizado");
 						telaOk.show(true);
 					}else {
 						PopUp telaErro = new PopUp("Erro, Cadastro Não Realizado");
 					telaErro.show(true);
 					}
-				} catch (NumberFormatException | SQLException e1) {
+				} catch (NumberFormatException e1) {
 					PopUp telaErro = new PopUp("Erro, Cadastro Não Realizado");
 					telaErro.show(true);
 				}

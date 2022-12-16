@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import model.Alimento;
 
@@ -108,6 +109,27 @@ public class AlimentoDAO {
 			alimento = new Alimento(rs.getLong("alimentoid"), rs.getString("alimentonome"), rs.getDouble("alimentocalorias"), rs.getString("alimentopropriedades"));
 		}
 		return alimento;
+	}
+	
+	public ArrayList<Alimento> allAlimentosToArray() throws SQLException{
+		ConnectionFactory cFactory = new ConnectionFactory();
+		Connection connection = cFactory.recuperarConexao();
+		
+		String query = "select * from alimento;";
+		
+		PreparedStatement pstmt = connection.prepareStatement(query);
+		
+		ResultSet rs = pstmt.executeQuery();
+		
+		ArrayList<Alimento> alimentos = new ArrayList<>();
+		
+		while(rs.next()) {
+			Alimento alimento = new Alimento(rs.getLong("alimentoid"), rs.getString("alimentonome"), rs.getDouble("alimentocalorias"), rs.getString("alimentopropriedades"));
+			alimentos.add(alimento);
+		}
+		
+		
+		return alimentos;
 	}
 	
 	

@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import controller.AlimentoCRUD;
+import model.Atleta;
 
 import javax.swing.JTextField;
 import javax.swing.JLabel;
@@ -25,26 +26,8 @@ public class SolicitarAlteracao extends JFrame {
 	private AlimentoCRUD alimentoController = new AlimentoCRUD();
 	private JTextField textFieldNomePlano;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					SolicitarAlteracao frame = new SolicitarAlteracao();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
-	public SolicitarAlteracao() {
+	
+	public SolicitarAlteracao(Atleta atlea) {
 		setTitle("Solicitar Alteração");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 501, 317);
@@ -76,22 +59,22 @@ public class SolicitarAlteracao extends JFrame {
 		JButton btnEnviarSolicitacao = new JButton("Enviar Solicitação");
 		btnEnviarSolicitacao.setForeground(new Color(255, 255, 255));
 		btnEnviarSolicitacao.setBackground(new Color(20, 167, 245));
-		btnEnviarSolicitacao.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				try {
-					if(alimentoController.cadastrarAlimento(textFieldDescricao.getText(), Integer.parseInt(textFieldRepeticoes.getText()) , textFieldInstrucoes.getText())) {
-						PopUp telaOk = new PopUp("Cadastro Realizado");
-						telaOk.show(true);
-					}else {
-						PopUp telaErro = new PopUp("Erro, Cadastro Não Realizado");
-					telaErro.show(true);
-					}
-				} catch (NumberFormatException | SQLException e1) {
-					PopUp telaErro = new PopUp("Erro, Cadastro Não Realizado");
-					telaErro.show(true);
-				}
-			}
-		});
+//		btnEnviarSolicitacao.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				try {
+//					if(alimentoController.cadastrarAlimento(textFieldDescricao.getText(), Integer.parseInt(textFieldRepeticoes.getText()) , textFieldInstrucoes.getText())) {
+//						PopUp telaOk = new PopUp("Cadastro Realizado");
+//						telaOk.show(true);
+//					}else {
+//						PopUp telaErro = new PopUp("Erro, Cadastro Não Realizado");
+//					telaErro.show(true);
+//					}
+//				} catch (NumberFormatException | SQLException e1) {
+//					PopUp telaErro = new PopUp("Erro, Cadastro Não Realizado");
+//					telaErro.show(true);
+//				}
+//			}
+//		});
 		btnEnviarSolicitacao.setBounds(159, 243, 169, 23);
 		contentPane.add(btnEnviarSolicitacao);
 		

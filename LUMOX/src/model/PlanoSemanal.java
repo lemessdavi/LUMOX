@@ -124,5 +124,10 @@ public class PlanoSemanal {
 		this.nome = nome;
 	}
 
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return nome;
+	}
 	
 }

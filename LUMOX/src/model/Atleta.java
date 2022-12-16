@@ -40,6 +40,8 @@ public class Atleta extends Pessoa {
 		this.plano = plano;
 	}
 	
-	// FALTA AS SOLICITACOES DE ALTERACAO
-
+	@Override
+	public String toString() {
+		return nome;
+	}
 }

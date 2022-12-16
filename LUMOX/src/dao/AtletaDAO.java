@@ -7,6 +7,7 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import controller.AvaliacaoCRUD;
 import model.Alimento;
 import model.Atleta;
 import model.PlanoSemanal;
@@ -161,20 +162,18 @@ public ResultSet selectAlimentosDoDiaContent(Atleta atleta, String dia) throws S
 		String email = null ;
 		String senha = null ;
 		
+		
 		while(rs.next()) {
 			PlanoSemanalDAO dao = new PlanoSemanalDAO();
 			plano = dao.selectPlanoSemanal(rs.getLong("atletaplanosemanal"));
-			System.out.println("entrou aq");
 			id = rs.getLong("atletaid");
 			nome = rs.getString("atletanome");
 			cpf = rs.getString("atletacpf");
 			email = rs.getString("atletaemail");
 			senha = rs.getString("atletasenha");
-			System.out.println( rs.getLong("atletaid"));
 		}
 		
 		
-		System.out.println("atleta id eh " + id);
 		Atleta atleta = new Atleta(id, nome, cpf, email, senha, plano);
 		
 		System.out.println(atleta);
@@ -222,6 +221,19 @@ public ResultSet selectAlimentosDoDiaContent(Atleta atleta, String dia) throws S
 		PreparedStatement pstmt = connection.prepareStatement(query);
 		
         pstmt.setLong(1, atleta.getId());
+        
+		ResultSet rs = pstmt.executeQuery();
+		
+		return rs;
+	}
+	
+	public ResultSet selectAllAtletas() throws SQLException {
+		ConnectionFactory cFactory = new ConnectionFactory();
+		Connection connection = cFactory.recuperarConexao();
+		
+		String query = "select * from atleta;";
+		
+		PreparedStatement pstmt = connection.prepareStatement(query);
         
 		ResultSet rs = pstmt.executeQuery();
 		

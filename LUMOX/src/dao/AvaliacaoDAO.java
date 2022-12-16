@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import controller.AtletaCRUD;
 import model.Atleta;
 import model.Avaliacao;
 
@@ -73,5 +74,34 @@ public class AvaliacaoDAO {
             System.out.println(ex.getMessage());
         }
         return false;
+	}
+
+	public Avaliacao selectAvaliacao(Atleta atleta) throws SQLException {
+		ConnectionFactory cFactory = new ConnectionFactory();
+		Connection connection = cFactory.recuperarConexao();
+		
+		String  SQL = "select * from avaliacao where avaliacaoatleta = ?;";
+		
+
+        try (
+               PreparedStatement pstmt = connection.prepareStatement(SQL)) {
+
+            pstmt.setLong(1, atleta.getId());
+           
+            ResultSet rs =  pstmt.executeQuery();
+
+            while(rs.next()) {
+            	long id = rs.getLong("avaliacaoid");
+            	String texto = rs.getString("avaliacaodescricao");
+            	
+            	Avaliacao avaliacao = new Avaliacao(id, atleta, texto);
+            	
+            	atleta.setAvaliacao(avaliacao);
+            	return avaliacao;
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return null;
 	}
 }

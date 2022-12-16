@@ -47,5 +47,9 @@ public class Alimento {
 		this.propriedades = propriedades;
 	}
 	
+	@Override
+	public String toString() {
+		return nome;
+	}
 	
 }

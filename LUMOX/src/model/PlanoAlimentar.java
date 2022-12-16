@@ -23,6 +23,15 @@ public class PlanoAlimentar {
 		this.personal = personal;
 	}
 	
+	public PlanoAlimentar(long id, String nome, Personal personal) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.personal = personal;
+	}
+	
+	
+
 	public Personal getPersonal() {
 		return personal;
 	}
@@ -61,7 +70,10 @@ public class PlanoAlimentar {
 	}
 
 	
-	
+	@Override
+	public String toString() {
+		return nome;
+	}
 	
 	
 }

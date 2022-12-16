@@ -65,6 +65,9 @@ public class Exercicio {
 		this.instrucoes = instrucoes;
 	}
 
-
+	@Override
+	public String toString() {
+		return nome;
+	}
 	
 }

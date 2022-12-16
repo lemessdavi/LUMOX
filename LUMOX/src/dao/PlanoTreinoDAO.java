@@ -59,7 +59,7 @@ public class PlanoTreinoDAO {
 		
 		String  SQL = " update planotreino "
 				+ "set planotreinonome = ?,"
-				+ "planotreinopersonal = ?"
+				+ "planotreinopersonal = ? "
 				+ "where planotreinoid = ?;" ;
 		
 
@@ -69,6 +69,10 @@ public class PlanoTreinoDAO {
             pstmt.setString(1, plano.getNome());
             pstmt.setLong(2, personal.getId());
             pstmt.setLong(3, plano.getId());
+            
+            System.out.println(plano.getNome());
+            System.out.println(personal.getId());
+            System.out.println(plano.getId());
            
 
             int affectedRows = pstmt.executeUpdate();
@@ -139,5 +143,72 @@ public class PlanoTreinoDAO {
 		
 		
 		return plano;
+	}
+
+	public ResultSet selectAllPlanos() throws SQLException {
+		ConnectionFactory cFactory = new ConnectionFactory();
+		Connection connection = cFactory.recuperarConexao();
+		
+		String query = "select * from planotreino;";
+		
+		PreparedStatement pstmt = connection.prepareStatement(query);
+		
+		ResultSet rs = pstmt.executeQuery();
+		
+		return rs;
+	}
+
+	public void inserPlanoTreinoXExercicio(PlanoTreino planoTreino, Exercicio exercicio) throws SQLException {
+		
+		ConnectionFactory cFactory = new ConnectionFactory();
+		Connection connection = cFactory.recuperarConexao();
+		
+		String SQL = "insert into planotreinoxexercicio (planotreinoid, exercicioid ) values (?,?)";
+		
+		
+                
+		try (
+			PreparedStatement pstmt = connection.prepareStatement(SQL)) {
+
+			pstmt.setLong(1, planoTreino.getId());
+			pstmt.setLong(2, exercicio.getId());
+                   
+
+			int affectedRows = pstmt.executeUpdate();
+               
+		} catch (SQLException ex) {
+			System.out.println(ex.getMessage());
+		}
+        
+	}
+	
+	public ResultSet selectAllPlanosPersonalContents() throws SQLException {
+		ConnectionFactory cFactory = new ConnectionFactory();
+		Connection connection = cFactory.recuperarConexao();
+		
+		String query = "select planotreino.planotreinonome, exercicio.exercicionome, exercicio.exerciciorepeticoes, exercicio.exerciciotempo, exercicio.exercicioinstrucoes from exercicio "
+				+ "inner join planotreinoxexercicio on planotreinoxexercicio.exercicioid = exercicio.exercicioid "
+				+ "inner join planotreino on planotreinoxexercicio.planotreinoid = planotreino.planotreinoid; ";
+		
+		PreparedStatement pstmt = connection.prepareStatement(query);
+		
+		ResultSet rs = pstmt.executeQuery();
+		
+		return rs;
+	}
+
+	public ResultSetMetaData selectAllPlanosPersonalModel() throws SQLException {
+		ConnectionFactory cFactory = new ConnectionFactory();
+		Connection connection = cFactory.recuperarConexao();
+		
+		String query = "select planotreino.planotreinonome, exercicio.exercicionome, exercicio.exerciciorepeticoes, exercicio.exerciciotempo, exercicio.exercicioinstrucoes from exercicio "
+				+ "inner join planotreinoxexercicio on planotreinoxexercicio.exercicioid = exercicio.exercicioid "
+				+ "inner join planotreino on planotreinoxexercicio.planotreinoid = planotreino.planotreinoid; ";
+		
+		PreparedStatement pstmt = connection.prepareStatement(query);
+		
+		ResultSet rs = pstmt.executeQuery();
+		
+		return rs.getMetaData();
 	}
 }

@@ -1,6 +1,9 @@
 package controller;
 
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.Vector;
 
 import dao.AtletaDAO;
 import dao.PersonalDAO;
@@ -44,4 +47,6 @@ public class PersonalCRUD {
 		};
 		return null;
 	}
+
+	
 }

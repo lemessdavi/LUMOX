@@ -7,12 +7,16 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import controller.AlimentoCRUD;
+import controller.AtletaCRUD;
+import controller.AvaliacaoCRUD;
+import model.Atleta;
 
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.Font;
@@ -22,7 +26,8 @@ public class CadastroAvaliacao extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textFieldDescricao;
-	private AlimentoCRUD alimentoController = new AlimentoCRUD();
+	private AvaliacaoCRUD crud = new AvaliacaoCRUD();
+	private AtletaCRUD crudAtleta = new AtletaCRUD();
 
 	/**
 	 * Launch the application.
@@ -72,20 +77,37 @@ public class CadastroAvaliacao extends JFrame {
 		lblCalorias.setBounds(28, 106, 161, 14);
 		contentPane.add(lblCalorias);
 		
+		
+
+		JLabel lblNewLabel = new JLabel("Cadastrar Avaliação");
+		lblNewLabel.setFont(new Font("Dialog", Font.BOLD, 15));
+		lblNewLabel.setForeground(new Color(255, 255, 255));
+		lblNewLabel.setBounds(168, 10, 150, 36);
+		contentPane.add(lblNewLabel);
+		
+		
+		ArrayList<Atleta> atletas = crudAtleta.selectAllAtletasToArray();
+		
+		final JComboBox cbAtleta = new JComboBox(atletas.toArray());
+		cbAtleta.setBackground(new Color(76, 76, 76));
+		cbAtleta.setForeground(new Color(255, 255, 255));
+		cbAtleta.setBounds(28, 74, 180, 20);
+		contentPane.add(cbAtleta);
+		
 		JButton btnCadastrar = new JButton("Cadastrar");
 		btnCadastrar.setForeground(new Color(255, 255, 255));
 		btnCadastrar.setBackground(new Color(20, 167, 245));
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					if(alimentoController.cadastrarAlimento(textFieldDescricao.getText(), Integer.parseInt(textFieldRepeticoes.getText()) , textFieldInstrucoes.getText())) {
+					if(crud.cadastrarAvaliacao((Atleta) cbAtleta.getSelectedItem(),textFieldDescricao.getText())) {
 						PopUp telaOk = new PopUp("Cadastro Realizado");
 						telaOk.show(true);
 					}else {
 						PopUp telaErro = new PopUp("Erro, Cadastro Não Realizado");
 					telaErro.show(true);
 					}
-				} catch (NumberFormatException | SQLException e1) {
+				} catch (NumberFormatException e1) {
 					PopUp telaErro = new PopUp("Erro, Cadastro Não Realizado");
 					telaErro.show(true);
 				}
@@ -94,16 +116,5 @@ public class CadastroAvaliacao extends JFrame {
 		btnCadastrar.setBounds(159, 243, 169, 23);
 		contentPane.add(btnCadastrar);
 		
-		JLabel lblNewLabel = new JLabel("Cadastrar Avaliação");
-		lblNewLabel.setFont(new Font("Dialog", Font.BOLD, 15));
-		lblNewLabel.setForeground(new Color(255, 255, 255));
-		lblNewLabel.setBounds(168, 10, 150, 36);
-		contentPane.add(lblNewLabel);
-		
-		JComboBox cbAtleta = new JComboBox();
-		cbAtleta.setBackground(new Color(76, 76, 76));
-		cbAtleta.setForeground(new Color(255, 255, 255));
-		cbAtleta.setBounds(28, 74, 180, 20);
-		contentPane.add(cbAtleta);
 	}
 }

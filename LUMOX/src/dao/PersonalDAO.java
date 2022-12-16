@@ -98,11 +98,11 @@ public class PersonalDAO {
 		String senha = null ;
 		
 		while (rs.next()) {
-		id = rs.getLong("personalid");
-		nome = rs.getString("personalnome");
-		cpf = rs.getString("personalcpf");
-		email = rs.getString("personalemail");
-		senha = rs.getString("personalsenha");
+			id = rs.getLong("personalid");
+			nome = rs.getString("personalnome");
+			cpf = rs.getString("personalcpf");
+			email = rs.getString("personalemail");
+			senha = rs.getString("personalsenha");
 		}
 		
 		Personal personal = new Personal (id, nome, cpf, email, senha);

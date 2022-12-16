@@ -7,12 +7,16 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import controller.AlimentoCRUD;
+import controller.AtletaCRUD;
+import controller.AvaliacaoCRUD;
+import model.Atleta;
 
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.Font;
@@ -22,27 +26,11 @@ public class AlterarAvaliacao extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textFieldDescricao;
-	private AlimentoCRUD alimentoController = new AlimentoCRUD();
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					AlterarAvaliacao frame = new AlterarAvaliacao();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
+	private AtletaCRUD atletaCRUD = new AtletaCRUD();
+	private AvaliacaoCRUD avaliacaoCRUD = new AvaliacaoCRUD();
+	private Atleta atleta;
+	
+	
 	public AlterarAvaliacao() {
 		setTitle("Alterar Avaliação");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -72,20 +60,44 @@ public class AlterarAvaliacao extends JFrame {
 		lblCalorias.setBounds(28, 106, 161, 14);
 		contentPane.add(lblCalorias);
 		
+
+		JLabel lblNewLabel = new JLabel("Alterar Avaliação");
+		lblNewLabel.setFont(new Font("Dialog", Font.BOLD, 15));
+		lblNewLabel.setForeground(new Color(255, 255, 255));
+		lblNewLabel.setBounds(177, 10, 132, 36);
+		contentPane.add(lblNewLabel);
+		
+		
+		ArrayList<Atleta> atletas = atletaCRUD.selectAllAtletasToArray();
+		
+		final JComboBox cbAtleta = new JComboBox(atletas.toArray());
+		cbAtleta.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				atleta = (Atleta) cbAtleta.getSelectedItem();
+				textFieldDescricao.setText(atleta.getAvaliacao().getAvaliacao());
+			}
+		});
+		cbAtleta.setBackground(new Color(76, 76, 76));
+		cbAtleta.setForeground(new Color(255, 255, 255));
+		cbAtleta.setBounds(28, 74, 180, 20);
+		contentPane.add(cbAtleta);
+		
+		
+		
 		JButton btnConfirmar = new JButton("Confirmar");
 		btnConfirmar.setForeground(new Color(255, 255, 255));
 		btnConfirmar.setBackground(new Color(20, 167, 245));
 		btnConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					if(alimentoController.cadastrarAlimento(textFieldDescricao.getText(), Integer.parseInt(textFieldRepeticoes.getText()) , textFieldInstrucoes.getText())) {
+					if(avaliacaoCRUD.updateAvaliacao(atleta,textFieldDescricao.getText(),atleta.getAvaliacao().getId())) {
 						PopUp telaOk = new PopUp("Cadastro Realizado");
 						telaOk.show(true);
 					}else {
 						PopUp telaErro = new PopUp("Erro, Cadastro Não Realizado");
 					telaErro.show(true);
 					}
-				} catch (NumberFormatException | SQLException e1) {
+				} catch (NumberFormatException e1) {
 					PopUp telaErro = new PopUp("Erro, Cadastro Não Realizado");
 					telaErro.show(true);
 				}
@@ -94,16 +106,5 @@ public class AlterarAvaliacao extends JFrame {
 		btnConfirmar.setBounds(159, 243, 169, 23);
 		contentPane.add(btnConfirmar);
 		
-		JLabel lblNewLabel = new JLabel("Alterar Avaliação");
-		lblNewLabel.setFont(new Font("Dialog", Font.BOLD, 15));
-		lblNewLabel.setForeground(new Color(255, 255, 255));
-		lblNewLabel.setBounds(177, 10, 132, 36);
-		contentPane.add(lblNewLabel);
-		
-		JComboBox cbAtleta = new JComboBox();
-		cbAtleta.setBackground(new Color(76, 76, 76));
-		cbAtleta.setForeground(new Color(255, 255, 255));
-		cbAtleta.setBounds(28, 74, 180, 20);
-		contentPane.add(cbAtleta);
 	}
 }

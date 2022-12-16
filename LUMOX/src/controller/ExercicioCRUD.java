@@ -3,6 +3,7 @@ package controller;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Vector;
 
 import dao.ExercicioDAO;
@@ -68,5 +69,26 @@ public class ExercicioCRUD {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public ArrayList<Exercicio> selectAllExerciciosToArray(){
+		ArrayList<Exercicio> exercicios = new ArrayList<>();
+		try {
+			ResultSet rs = exercicioDAO.selectAllExerciciosContent();
+			while(rs.next()) {
+				long id = rs.getLong("exercicioid");
+				String nome = rs.getString("exercicionome");
+				String rep = String.valueOf(rs.getInt("exerciciorepeticoes")); //mudar no banco para string, tirar o valuof daqui e dar um getString
+				String tempo = rs.getString("exerciciotempo");
+				String  instr = rs.getString("exercicioinstrucoes");
+			
+				Exercicio exercicio = new Exercicio(id, nome, rep, tempo, instr);
+				exercicios.add(exercicio);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return exercicios;
 	}
 }

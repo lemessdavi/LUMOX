@@ -76,6 +76,12 @@ public class Login extends JFrame {
 		contentPane.add(lblSenha);
 		
 		JButton btnCadastrase = new JButton("Cadastra-se");
+		btnCadastrase.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CriarConta tela = new CriarConta();
+				tela.show();
+			}
+		});
 		btnCadastrase.setForeground(new Color(255, 255, 255));
 		btnCadastrase.setBackground(new Color(76, 76, 76));
 		btnCadastrase.setBounds(298, 326, 104, 23);
@@ -114,7 +120,7 @@ public class Login extends JFrame {
 						PopUp pop = new PopUp("Personal nao existe");
 						pop.show();
 					}
-							
+					
 				}
 					
 			}

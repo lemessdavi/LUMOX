@@ -23,6 +23,17 @@ public class DiaDaSemanaCRUD {
 			return false;
 		}
 	}
+	public DiaDaSemana cadastrarDiaDaSemanaAndReturn(String diaNome, PlanoAlimentar planoAlimentar, PlanoTreino planoTreino) {
+		dia = new DiaDaSemana(diaNome, planoAlimentar, planoTreino);
+		diaDAO= new DiaDaSemanaDAO();
+		try {
+			dia.setId(diaDAO.insertDiaDaSemana(dia, planoAlimentar, planoTreino));
+			return dia;
+		}catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 	
 	public boolean updateDiaDaSemana(long id,String diaNome, PlanoAlimentar planoAlimentar, PlanoTreino planoTreino) {
 		dia = new DiaDaSemana(id, diaNome, planoAlimentar, planoTreino);

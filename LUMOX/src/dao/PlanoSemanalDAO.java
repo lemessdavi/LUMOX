@@ -118,5 +118,19 @@ public class PlanoSemanalDAO {
 		}
 		return plano;
 	}
+
+	public ResultSet selectAllPlanosAlimentares() throws SQLException {
+		ConnectionFactory cFactory = new ConnectionFactory();
+		Connection connection = cFactory.recuperarConexao();
+		
+		String query = "select * from planosemanal;";
+		
+		PreparedStatement pstmt = connection.prepareStatement(query);
+		
+        
+		ResultSet rs = pstmt.executeQuery();
+		
+		return rs;
+	}
 	
 }

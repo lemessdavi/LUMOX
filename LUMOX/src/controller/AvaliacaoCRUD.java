@@ -1,16 +1,18 @@
 package controller;
 
+import java.sql.SQLException;
+
 import dao.AvaliacaoDAO;
 import model.Atleta;
 import model.Avaliacao;
 
 public class AvaliacaoCRUD {
 	private Avaliacao avaliacaoModel;
-	private AvaliacaoDAO avaliacaoDAO;
+	private AvaliacaoDAO avaliacaoDAO = new AvaliacaoDAO();;
 	
 	public boolean cadastrarAvaliacao(Atleta atleta, String texto) {
 		avaliacaoModel = new Avaliacao(atleta, texto);
-		avaliacaoDAO = new AvaliacaoDAO();
+		
 		try {
 			avaliacaoModel.setId(avaliacaoDAO.insertAvaliacao(avaliacaoModel, atleta));
 			return true;
@@ -30,5 +32,14 @@ public class AvaliacaoCRUD {
 			e.printStackTrace();
 			return false;
 		}
+	}
+	
+	public void updateAvaliacaoAtleta(Atleta atleta) {
+		try {
+			avaliacaoDAO.selectAvaliacao(atleta);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 	}
 }

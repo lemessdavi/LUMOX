@@ -4,9 +4,11 @@ import java.sql.ResultSet;
 import javax.swing.table.*;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Vector;
 
 import dao.AtletaDAO;
+import dao.PlanoSemanalDAO;
 import model.Atleta;
 import model.PlanoSemanal;
 
@@ -95,12 +97,44 @@ public class AtletaCRUD {
 	}
 
 	public ResultSet selectJtableContentsTreino(String dia, Atleta atleta) {
-		
-		
 		try {
 			ResultSet rs = daoAtleta.selectExerciciosDoDiaContent(atleta,dia);
 			
 			return rs;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public ArrayList<Atleta> selectAllAtletasToArray(){
+		
+		ArrayList<Atleta> atletas = new ArrayList<>();
+		try {
+			ResultSet rs = daoAtleta.selectAllAtletas();
+			
+			PlanoSemanal plano = null;
+			
+			long id = 0 ;
+			String nome = null ;
+			String cpf = null ;
+			String email = null ;
+			String senha = null ;
+			
+			while(rs.next()) {
+				PlanoSemanalDAO dao = new PlanoSemanalDAO();
+				plano = dao.selectPlanoSemanal(rs.getLong("atletaplanosemanal"));
+				id = rs.getLong("atletaid");
+				nome = rs.getString("atletanome");
+				cpf = rs.getString("atletacpf");
+				email = rs.getString("atletaemail");
+				senha = rs.getString("atletasenha");
+				Atleta atleta = new Atleta(id, nome, cpf, email, senha, plano);
+				atletas.add(atleta);
+			}
+			
+			return atletas;
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

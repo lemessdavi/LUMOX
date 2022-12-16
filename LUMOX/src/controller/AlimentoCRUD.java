@@ -2,6 +2,7 @@ package controller;
 
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.swing.table.*;
 import javax.swing.*;
@@ -62,6 +63,15 @@ public class AlimentoCRUD {
 			}
 			
 			return colName;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public ArrayList<Alimento> selectAllAlimentosToArray(){
+		try {
+			return daoAlimento.allAlimentosToArray();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

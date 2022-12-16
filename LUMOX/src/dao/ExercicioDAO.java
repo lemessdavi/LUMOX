@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import model.DiaDaSemana;
 import model.Exercicio;
@@ -137,4 +138,6 @@ public class ExercicioDAO {
 		
 		return rs;
 	}
+
+	
 }

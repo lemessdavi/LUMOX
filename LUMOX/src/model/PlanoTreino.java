@@ -24,6 +24,13 @@ public class PlanoTreino {
 		this.personal = personal;
 	}
 	
+	public PlanoTreino(long id, String nome, Personal personal) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.personal = personal;
+	}
+
 	public long getId() {
 		return id;
 	}
@@ -49,7 +56,10 @@ public class PlanoTreino {
 	}
 	
 	
-	
+	@Override
+	public String toString() {
+		return nome;
+	}
 	
 	
 }
