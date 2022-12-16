@@ -181,4 +181,50 @@ public ResultSet selectAlimentosDoDiaContent(Atleta atleta, String dia) throws S
 		
 		return atleta;
 	}
+
+	public ResultSetMetaData selectExerciciosDoDiaModel(Atleta atleta, String dia) throws SQLException {
+
+		ConnectionFactory cFactory = new ConnectionFactory();
+		Connection connection = cFactory.recuperarConexao();
+		
+		String query = "select  exercicio.exercicionome, exercicio.exerciciorepeticoes, exercicio.exerciciotempo, exercicio.exercicioinstrucoes from planosemanal \r\n"
+				+ "	inner join atleta on atleta.atletaplanosemanal = planosemanal.planosemanalid \r\n"
+				+ "	inner join diadasemana on planosemanal." + dia + " = diadasemana.diadasemanaid \r\n"
+				+ "	inner join planotreino on planotreino.planotreinoid = diadasemana.diadasemanaplanexer\r\n"
+				+ "	inner join planotreinoxexercicio on planotreino.planotreinoid = planotreinoxexercicio.planotreinoid \r\n"
+				+ "	inner join exercicio on planotreinoxexercicio.exercicioid = exercicio.exercicioid \r\n"
+				+ "	where atleta.atletaid = ? ";
+		
+		PreparedStatement pstmt = connection.prepareStatement(query);
+		
+        pstmt.setLong(1, atleta.getId());
+        
+ 		
+		ResultSet rs = pstmt.executeQuery();
+		
+		
+		return rs.getMetaData();
+	}
+	
+	public ResultSet selectExerciciosDoDiaContent(Atleta atleta, String dia) throws SQLException {
+
+		ConnectionFactory cFactory = new ConnectionFactory();
+		Connection connection = cFactory.recuperarConexao();
+		
+		String query = "select  exercicio.exercicionome, exercicio.exerciciorepeticoes, exercicio.exerciciotempo, exercicio.exercicioinstrucoes from planosemanal \r\n"
+				+ "	inner join atleta on atleta.atletaplanosemanal = planosemanal.planosemanalid \r\n"
+				+ "	inner join diadasemana on planosemanal." + dia + " = diadasemana.diadasemanaid \r\n"
+				+ "	inner join planotreino on planotreino.planotreinoid = diadasemana.diadasemanaplanexer\r\n"
+				+ "	inner join planotreinoxexercicio on planotreino.planotreinoid = planotreinoxexercicio.planotreinoid \r\n"
+				+ "	inner join exercicio on planotreinoxexercicio.exercicioid = exercicio.exercicioid \r\n"
+				+ "	where atleta.atletaid = ? ";
+		
+		PreparedStatement pstmt = connection.prepareStatement(query);
+		
+        pstmt.setLong(1, atleta.getId());
+        
+		ResultSet rs = pstmt.executeQuery();
+		
+		return rs;
+	}
 }
