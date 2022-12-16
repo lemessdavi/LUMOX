@@ -52,7 +52,7 @@ public class Login extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 715, 470);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(35, 35, 35));
+		contentPane.setBackground(new Color(44, 44, 44));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
@@ -60,37 +60,36 @@ public class Login extends JFrame {
 		
 		textFieldLogin = new JTextField();
 		textFieldLogin.setForeground(new Color(255, 255, 255));
-		textFieldLogin.setBackground(new Color(80, 80, 80));
+		textFieldLogin.setBackground(new Color(76, 76, 76));
 		textFieldLogin.setBounds(245, 175, 210, 30);
 		contentPane.add(textFieldLogin);
 		textFieldLogin.setColumns(10);
 		
-		
-		JLabel lblNewLabel = new JLabel("Login");
+		JLabel lblNewLabel = new JLabel("Senha");
 		lblNewLabel.setForeground(new Color(255, 255, 255));
 		lblNewLabel.setBounds(245, 217, 46, 14);
 		contentPane.add(lblNewLabel);
 		
-		JLabel lblSenha = new JLabel("Senha");
+		JLabel lblSenha = new JLabel("Login");
 		lblSenha.setForeground(new Color(255, 255, 255));
 		lblSenha.setBounds(245, 155, 46, 14);
 		contentPane.add(lblSenha);
 		
 		JButton btnCadastrase = new JButton("Cadastra-se");
 		btnCadastrase.setForeground(new Color(255, 255, 255));
-		btnCadastrase.setBackground(new Color(80, 80, 80));
+		btnCadastrase.setBackground(new Color(76, 76, 76));
 		btnCadastrase.setBounds(298, 326, 104, 23);
 		contentPane.add(btnCadastrase);
 		
 		final JCheckBox chckbxPersonal = new JCheckBox("Personal");
 		chckbxPersonal.setForeground(new Color(255, 255, 255));
-		chckbxPersonal.setBackground(new Color(35, 35, 35));
+		chckbxPersonal.setBackground(new Color(44, 44, 44));
 		chckbxPersonal.setBounds(313, 357, 75, 23);
 		contentPane.add(chckbxPersonal);
 		
 		JButton btnLogin = new JButton("Login");
 		btnLogin.setForeground(new Color(255, 255, 255));
-		btnLogin.setBackground(new Color(58, 164, 241));
+		btnLogin.setBackground(new Color(20, 167, 245));
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -125,7 +124,7 @@ public class Login extends JFrame {
 		
 		textFieldSenha = new JPasswordField();
 		textFieldSenha.setForeground(new Color(255, 255, 255));
-		textFieldSenha.setBackground(new Color(80, 80, 80));
+		textFieldSenha.setBackground(new Color(76, 76, 76));
 		textFieldSenha.setBounds(245, 236, 210, 30);
 		contentPane.add(textFieldSenha);
 		

@@ -37,6 +37,10 @@ public class HomePersonal extends JFrame {
 		});
 		btnExercicios.setBounds(76, 135, 89, 23);
 		contentPane.add(btnExercicios);
+		
+		JButton btnAlimentos = new JButton("Alimentos");
+		btnAlimentos.setBounds(290, 135, 89, 23);
+		contentPane.add(btnAlimentos);
 	}
 
 }
