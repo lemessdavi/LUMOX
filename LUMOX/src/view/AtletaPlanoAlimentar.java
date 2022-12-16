@@ -21,6 +21,7 @@ import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 public class AtletaPlanoAlimentar extends JFrame {
 
@@ -39,13 +40,14 @@ public class AtletaPlanoAlimentar extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 919, 573);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(44, 44, 44));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(30, 22, 595, 501);
+		scrollPane.setBounds(20, 35, 655, 465);
 		contentPane.add(scrollPane);
 		
 		table = new JTable();
@@ -61,11 +63,15 @@ public class AtletaPlanoAlimentar extends JFrame {
 		dias.add("domingo");
 		
 		final JComboBox comboBoxDia = new JComboBox(dias.toArray());
+		comboBoxDia.setForeground(new Color(255, 255, 255));
+		comboBoxDia.setBackground(new Color(76, 76, 76));
 		comboBoxDia.setToolTipText("DiaDaSemana");
-		comboBoxDia.setBounds(666, 41, 181, 22);
+		comboBoxDia.setBounds(700, 88, 181, 22);
 		contentPane.add(comboBoxDia);
 		
 		btnNewButton = new JButton("Visualizar");
+		btnNewButton.setForeground(new Color(255, 255, 255));
+		btnNewButton.setBackground(new Color(20, 167, 245));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DefaultTableModel model = (DefaultTableModel) table.getModel();
@@ -95,7 +101,7 @@ public class AtletaPlanoAlimentar extends JFrame {
 				
 			}
 		});
-		btnNewButton.setBounds(713, 159, 89, 23);
+		btnNewButton.setBounds(745, 416, 107, 25);
 		contentPane.add(btnNewButton);
 	}
 }

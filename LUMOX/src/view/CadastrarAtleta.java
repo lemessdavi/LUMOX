@@ -35,86 +35,88 @@ public class CadastrarAtleta extends JFrame {
 	public CadastrarAtleta() {
 		frame = new JFrame();
 		frame.getContentPane().setBackground(new Color(44, 44, 44));
-		frame.setBounds(100, 100, 715, 470);
+		frame.setBounds(100, 100, 715, 425);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JLabel lblNewLabel_1 = new JLabel("Crie uma de Personal");
+		JLabel lblNewLabel_1 = new JLabel("Cadastrar Atleta");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblNewLabel_1.setForeground(new Color(255, 255, 255));
-		lblNewLabel_1.setBounds(268, 90, 184, 17);
+		lblNewLabel_1.setBounds(281, 66, 130, 17);
 		frame.getContentPane().add(lblNewLabel_1);
 		
 		tfNome = new JTextField();
 		tfNome.setBackground(new Color(76, 76, 76));
 		tfNome.setForeground(new Color(255, 255, 255));
-		tfNome.setBounds(30, 249, 241, 26);
+		tfNome.setBounds(29, 198, 241, 26);
 		frame.getContentPane().add(tfNome);
 		tfNome.setColumns(10);
 		
 		JLabel lblNewLabel_1_1 = new JLabel("Nome");
 		lblNewLabel_1_1.setForeground(new Color(255, 255, 255));
-		lblNewLabel_1_1.setBounds(30, 228, 105, 13);
+		lblNewLabel_1_1.setBounds(29, 177, 105, 13);
 		frame.getContentPane().add(lblNewLabel_1_1);
 		
 		JLabel lblNewLabel_1_2 = new JLabel("CPF");
 		lblNewLabel_1_2.setForeground(new Color(255, 255, 255));
-		lblNewLabel_1_2.setBounds(30, 287, 105, 13);
+		lblNewLabel_1_2.setBounds(29, 236, 105, 13);
 		frame.getContentPane().add(lblNewLabel_1_2);
 		
 		JLabel lblNewLabel_1_3 = new JLabel("E-mail");
 		lblNewLabel_1_3.setForeground(new Color(255, 255, 255));
-		lblNewLabel_1_3.setBounds(425, 221, 105, 13);
+		lblNewLabel_1_3.setBounds(424, 170, 105, 13);
 		frame.getContentPane().add(lblNewLabel_1_3);
 		
 		JLabel lblNewLabel_1_4 = new JLabel("Senha");
 		lblNewLabel_1_4.setForeground(new Color(255, 255, 255));
-		lblNewLabel_1_4.setBounds(425, 284, 105, 13);
+		lblNewLabel_1_4.setBounds(424, 233, 105, 13);
 		frame.getContentPane().add(lblNewLabel_1_4);
 		
 		
 		JButton btnVoltar = new JButton("Voltar");
 		btnVoltar.setBackground(new Color(76, 76, 76));
 		btnVoltar.setForeground(new Color(255, 255, 255));
-		btnVoltar.setBounds(308, 400, 105, 21);
+		btnVoltar.setBounds(298, 345, 105, 21);
 		frame.getContentPane().add(btnVoltar);
 		
 		JLabel lblNewLabel_1_9 = new JLabel("LUMOX");
 		lblNewLabel_1_9.setForeground(Color.WHITE);
 		lblNewLabel_1_9.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblNewLabel_1_9.setBounds(318, 46, 70, 38);
+		lblNewLabel_1_9.setBounds(311, 22, 70, 38);
 		frame.getContentPane().add(lblNewLabel_1_9);
 		
 		tfCpf = new JTextField();
 		tfCpf.setBackground(new Color(76, 76, 76));
 		tfCpf.setForeground(new Color(255, 255, 255));
 		tfCpf.setColumns(10);
-		tfCpf.setBounds(30, 309, 241, 26);
+		tfCpf.setBounds(29, 258, 241, 26);
 		frame.getContentPane().add(tfCpf);
 		
 		tfEmail = new JTextField();
 		tfEmail.setBackground(new Color(76, 76, 76));
 		tfEmail.setForeground(new Color(255, 255, 255));
 		tfEmail.setColumns(10);
-		tfEmail.setBounds(425, 246, 241, 26);
+		tfEmail.setBounds(424, 195, 241, 26);
 		frame.getContentPane().add(tfEmail);
 		
 		tfSenha = new JPasswordField();
 		tfSenha.setBackground(new Color(76, 76, 76));
 		tfSenha.setForeground(new Color(255, 255, 255));
 		tfSenha.setColumns(10);
-		tfSenha.setBounds(425, 309, 241, 26);
+		tfSenha.setBounds(424, 258, 241, 26);
 		frame.getContentPane().add(tfSenha);
 		
 		PlanoSemanalCRUD crudSemanal = new PlanoSemanalCRUD();
 		ArrayList<PlanoSemanal> planos = crudSemanal.selectAllPlanosToArray();
 		final JComboBox comboBox = new JComboBox(planos.toArray());
-		comboBox.setBounds(281, 168, 145, 22);
+		comboBox.setForeground(new Color(255, 255, 255));
+		comboBox.setBackground(new Color(76, 76, 76));
+		comboBox.setBounds(278, 136, 145, 22);
 		frame.getContentPane().add(comboBox);
 		
 		JLabel lblNewLabel_1_1_1 = new JLabel("Plano Semanal:");
 		lblNewLabel_1_1_1.setForeground(Color.WHITE);
-		lblNewLabel_1_1_1.setBounds(281, 144, 105, 13);
+		lblNewLabel_1_1_1.setBounds(298, 112, 105, 13);
 		frame.getContentPane().add(lblNewLabel_1_1_1);
 		
 		JButton btnCriarConta = new JButton("Criar Conta");
@@ -136,7 +138,7 @@ public class CadastrarAtleta extends JFrame {
 				}
 			}
 		});
-		btnCriarConta.setBounds(308, 367, 105, 21);
+		btnCriarConta.setBounds(298, 312, 105, 21);
 		frame.getContentPane().add(btnCriarConta);
 		
 		

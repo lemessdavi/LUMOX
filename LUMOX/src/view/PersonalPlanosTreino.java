@@ -23,6 +23,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 public class PersonalPlanosTreino extends JFrame {
 
@@ -35,21 +36,24 @@ public class PersonalPlanosTreino extends JFrame {
 	 */
 	public PersonalPlanosTreino() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 638, 445);
+		setBounds(100, 100, 655, 465);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(44, 44, 44));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 11, 420, 384);
+		scrollPane.setBounds(16, 11, 609, 358);
 		contentPane.add(scrollPane);
 		
 		table = new JTable();
 		scrollPane.setViewportView(table);
 		
-		JButton btnNewButton = new JButton("New button");
+		JButton btnNewButton = new JButton("Atualizar");
+		btnNewButton.setBackground(new Color(20, 167, 245));
+		btnNewButton.setForeground(new Color(255, 255, 255));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DefaultTableModel model = (DefaultTableModel) table.getModel();
@@ -83,7 +87,7 @@ public class PersonalPlanosTreino extends JFrame {
 			
 			}
 		});
-		btnNewButton.setBounds(492, 300, 89, 23);
+		btnNewButton.setBounds(267, 382, 107, 25);
 		contentPane.add(btnNewButton);
 	}
 

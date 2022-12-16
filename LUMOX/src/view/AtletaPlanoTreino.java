@@ -18,6 +18,7 @@ import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 public class AtletaPlanoTreino extends JFrame {
 
@@ -31,15 +32,16 @@ public class AtletaPlanoTreino extends JFrame {
 	public AtletaPlanoTreino(Atleta a) {
 		atleta = a;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 674, 452);
+		setBounds(100, 100, 919, 573);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(44, 44, 44));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(23, 22, 398, 366);
+		scrollPane.setBounds(20, 35, 655, 465);
 		contentPane.add(scrollPane);
 		
 		table = new JTable();
@@ -55,10 +57,14 @@ public class AtletaPlanoTreino extends JFrame {
 		dias.add("domingo");
 		
 		final JComboBox comboBoxDia = new JComboBox(dias.toArray());
-		comboBoxDia.setBounds(465, 41, 141, 22);
+		comboBoxDia.setForeground(new Color(255, 255, 255));
+		comboBoxDia.setBackground(new Color(76, 76, 76));
+		comboBoxDia.setBounds(700, 88, 181, 22);
 		contentPane.add(comboBoxDia);
 		
-		JButton btnPopulaTabela = new JButton("New button");
+		JButton btnPopulaTabela = new JButton("Atualizar");
+		btnPopulaTabela.setForeground(new Color(255, 255, 255));
+		btnPopulaTabela.setBackground(new Color(20, 167, 245));
 		btnPopulaTabela.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DefaultTableModel model = (DefaultTableModel) table.getModel();
@@ -88,7 +94,7 @@ public class AtletaPlanoTreino extends JFrame {
 				}
 			}
 		});
-		btnPopulaTabela.setBounds(494, 162, 89, 23);
+		btnPopulaTabela.setBounds(745, 416, 107, 25);
 		contentPane.add(btnPopulaTabela);
 		
 		

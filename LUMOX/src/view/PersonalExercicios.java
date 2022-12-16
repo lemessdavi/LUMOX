@@ -17,6 +17,7 @@ import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 public class PersonalExercicios extends JFrame {
 
@@ -28,21 +29,24 @@ public class PersonalExercicios extends JFrame {
 	public PersonalExercicios(Personal personal1) {
 		personal = personal1;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 685, 427);
+		setBounds(100, 100, 655, 465);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(44, 44, 44));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 11, 378, 366);
+		scrollPane.setBounds(16, 11, 609, 358);
 		contentPane.add(scrollPane);
 		
 		table = new JTable();
 		scrollPane.setViewportView(table);
 		
-		JButton btnPouplateTable = new JButton("New button");
+		JButton btnPouplateTable = new JButton("Atualizar");
+		btnPouplateTable.setForeground(new Color(255, 255, 255));
+		btnPouplateTable.setBackground(new Color(20, 167, 245));
 		btnPouplateTable.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DefaultTableModel model = (DefaultTableModel) table.getModel();
@@ -73,7 +77,7 @@ public class PersonalExercicios extends JFrame {
 				}
 			}
 		});
-		btnPouplateTable.setBounds(490, 322, 89, 23);
+		btnPouplateTable.setBounds(267, 390, 107, 25);
 		contentPane.add(btnPouplateTable);
 		
 		
