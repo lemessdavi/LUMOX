@@ -21,7 +21,7 @@ public class HomePersonal extends JFrame {
 	public HomePersonal(Personal personal1) {
 		personal = personal1;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 505, 350);
+		setBounds(100, 100, 715, 470);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
