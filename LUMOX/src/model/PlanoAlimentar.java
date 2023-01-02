@@ -5,18 +5,41 @@ import java.util.ArrayList;
 public class PlanoAlimentar {
 	private long id;
 	private String nome;
-	private ArrayList<Alimento> manha;
-	private ArrayList<Alimento> tarde;
-	private ArrayList<Alimento> noite;
+	private ArrayList<Alimento> alimentos;
+	private Personal personal;
 	
-	public PlanoAlimentar(String nome, ArrayList<Alimento> manha, ArrayList<Alimento> tarde,
-			ArrayList<Alimento> noite) {
+	public PlanoAlimentar(String nome, ArrayList<Alimento> alimentos, Personal personal) {
 		super();
 		this.nome = nome;
-		this.manha = manha;
-		this.tarde = tarde;
-		this.noite = noite;
+		this.alimentos = alimentos;
+		this.personal = personal;
 	}
+	
+	public PlanoAlimentar(long id, String nome, ArrayList<Alimento> alimentos, Personal personal) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.alimentos = alimentos;
+		this.personal = personal;
+	}
+	
+	public PlanoAlimentar(long id, String nome, Personal personal) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.personal = personal;
+	}
+	
+	
+
+	public Personal getPersonal() {
+		return personal;
+	}
+	
+	public void setPersonal(Personal personal) {
+		this.personal = personal;
+	}
+	
 	
 	public long getId() {
 		return id;
@@ -34,32 +57,23 @@ public class PlanoAlimentar {
 		this.nome = nome;
 	}
 
-	public ArrayList<Alimento> getManha() {
-		return manha;
+	public ArrayList<Alimento> getAlimentos() {
+		return alimentos;
 	}
-
-	public void setManha(ArrayList<Alimento> manha) {
-		this.manha = manha;
+	
+	public void setAlimentos(ArrayList<Alimento> alimentos) {
+		this.alimentos = alimentos;
 	}
-
-	public ArrayList<Alimento> getTarde() {
-		return tarde;
-	}
-
-	public void setTarde(ArrayList<Alimento> tarde) {
-		this.tarde = tarde;
-	}
-
-	public ArrayList<Alimento> getNoite() {
-		return noite;
-	}
-
-	public void setNoite(ArrayList<Alimento> noite) {
-		this.noite = noite;
+	
+	public void addAlimento(Alimento alimento) {
+		alimentos.add(alimento);
 	}
 
 	
-	
+	@Override
+	public String toString() {
+		return nome;
+	}
 	
 	
 }

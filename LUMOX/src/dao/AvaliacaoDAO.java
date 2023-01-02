@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import controller.AtletaCRUD;
 import model.Atleta;
 import model.Avaliacao;
 
@@ -17,6 +18,7 @@ public class AvaliacaoDAO {
 		
 		String  SQL = "insert into avaliacao (avaliacaodescricao, avaliacaoatleta)"
 				+ "values  (?, ?)";
+		
 		
         long id = 0;
 
@@ -44,5 +46,62 @@ public class AvaliacaoDAO {
         }
         
 		return id;
+	}
+	
+	public boolean updateAvaliacao(Avaliacao avaliacao, Atleta atelta) throws SQLException {
+		ConnectionFactory cFactory = new ConnectionFactory();
+		Connection connection = cFactory.recuperarConexao();
+		
+		String  SQL = "update avaliacao "
+				+ "		set avaliacaodescricao = ?"
+				+ "		, avaliacaoatleta  = ?"
+				+ "		where avaliacaoid = ?;";;
+		
+
+        try (
+                PreparedStatement pstmt = connection.prepareStatement(SQL)) {
+
+            pstmt.setString(1, avaliacao.getAvaliacao());
+            pstmt.setLong(2, atelta.getId());
+            pstmt.setLong(3, avaliacao.getId());
+
+            int affectedRows = pstmt.executeUpdate();
+            // check the affected rows 
+            if (affectedRows > 0) {
+               return true;
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return false;
+	}
+
+	public Avaliacao selectAvaliacao(Atleta atleta) throws SQLException {
+		ConnectionFactory cFactory = new ConnectionFactory();
+		Connection connection = cFactory.recuperarConexao();
+		
+		String  SQL = "select * from avaliacao where avaliacaoatleta = ?;";
+		
+
+        try (
+               PreparedStatement pstmt = connection.prepareStatement(SQL)) {
+
+            pstmt.setLong(1, atleta.getId());
+           
+            ResultSet rs =  pstmt.executeQuery();
+
+            while(rs.next()) {
+            	long id = rs.getLong("avaliacaoid");
+            	String texto = rs.getString("avaliacaodescricao");
+            	
+            	Avaliacao avaliacao = new Avaliacao(id, atleta, texto);
+            	
+            	atleta.setAvaliacao(avaliacao);
+            	return avaliacao;
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return null;
 	}
 }

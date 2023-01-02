@@ -16,14 +16,14 @@ import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.Font;
+import javax.swing.JComboBox;
 
-public class CadastroAlimento extends JFrame {
+public class VisualizarPlanoTreinos extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textFieldNome;
-	private JTextField textFieldCalorias;
-	private JTextField textFieldPropriedades;
 	private AlimentoCRUD alimentoController = new AlimentoCRUD();
+	private JTextField textField;
 
 	/**
 	 * Launch the application.
@@ -32,7 +32,7 @@ public class CadastroAlimento extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CadastroAlimento frame = new CadastroAlimento();
+					VisualizarPlanoTreinos frame = new VisualizarPlanoTreinos();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -44,10 +44,10 @@ public class CadastroAlimento extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public CadastroAlimento() {
-		setTitle("Cadastro de Alimento");
+	public VisualizarPlanoTreinos() {
+		setTitle("Visualizar Plano de Treino");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 454, 337);
+		setBounds(100, 100, 454, 296);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(44, 44, 44));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -63,42 +63,23 @@ public class CadastroAlimento extends JFrame {
 		contentPane.add(textFieldNome);
 		textFieldNome.setColumns(10);
 		
-		JLabel lblNome = new JLabel("Nome:");
+		JLabel lblNome = new JLabel("Nome");
 		lblNome.setForeground(new Color(255, 255, 255));
 		lblNome.setBounds(28, 59, 46, 14);
 		contentPane.add(lblNome);
 		
-		JLabel lblCalorias = new JLabel("Calorias:");
+		JLabel lblCalorias = new JLabel("Exercícios");
 		lblCalorias.setForeground(new Color(255, 255, 255));
-		lblCalorias.setBounds(28, 106, 91, 14);
+		lblCalorias.setBounds(28, 153, 161, 14);
 		contentPane.add(lblCalorias);
 		
-		textFieldCalorias = new JTextField();
-		textFieldCalorias.setForeground(new Color(255, 255, 255));
-		textFieldCalorias.setBackground(new Color(76, 76, 76));
-		textFieldCalorias.setColumns(10);
-		textFieldCalorias.setBounds(28, 123, 180, 20);
-		contentPane.add(textFieldCalorias);
-		
-		JLabel lblPropriedades = new JLabel("Propriedades:");
-		lblPropriedades.setForeground(new Color(255, 255, 255));
-		lblPropriedades.setBounds(28, 152, 113, 14);
-		contentPane.add(lblPropriedades);
-		
-		textFieldPropriedades = new JTextField();
-		textFieldPropriedades.setForeground(new Color(255, 255, 255));
-		textFieldPropriedades.setBackground(new Color(76, 76, 76));
-		textFieldPropriedades.setColumns(10);
-		textFieldPropriedades.setBounds(28, 169, 381, 68);
-		contentPane.add(textFieldPropriedades);
-		
-		JButton btnCadastrar = new JButton("Cadastrar");
-		btnCadastrar.setForeground(new Color(255, 255, 255));
-		btnCadastrar.setBackground(new Color(20, 167, 245));
-		btnCadastrar.addActionListener(new ActionListener() {
+		JButton btnConfirmar = new JButton("Confirmar");
+		btnConfirmar.setForeground(new Color(255, 255, 255));
+		btnConfirmar.setBackground(new Color(20, 167, 245));
+		btnConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					if(alimentoController.cadastrarAlimento(textFieldNome.getText(), Integer.parseInt(textFieldCalorias.getText()) , textFieldPropriedades.getText())) {
+					if(alimentoController.cadastrarAlimento(textFieldNome.getText(), Integer.parseInt(textFieldRepeticoes.getText()) , textFieldInstrucoes.getText())) {
 						PopUp telaOk = new PopUp("Cadastro Realizado");
 						telaOk.show(true);
 					}else {
@@ -111,14 +92,31 @@ public class CadastroAlimento extends JFrame {
 				}
 			}
 		});
-		btnCadastrar.setBounds(163, 257, 113, 23);
-		contentPane.add(btnCadastrar);
+		btnConfirmar.setBounds(137, 216, 169, 23);
+		contentPane.add(btnConfirmar);
 		
-		JLabel lblNewLabel = new JLabel("Cadastrar Alimento");
+		JLabel lblNewLabel = new JLabel("Visualizar Plano de Treinos");
 		lblNewLabel.setFont(new Font("Dialog", Font.BOLD, 15));
 		lblNewLabel.setForeground(new Color(255, 255, 255));
-		lblNewLabel.setBounds(143, 10, 150, 36);
+		lblNewLabel.setBounds(118, 10, 203, 36);
 		contentPane.add(lblNewLabel);
+		
+		JComboBox cbExercicios = new JComboBox();
+		cbExercicios.setBackground(new Color(76, 76, 76));
+		cbExercicios.setForeground(new Color(255, 255, 255));
+		cbExercicios.setBounds(28, 169, 180, 20);
+		contentPane.add(cbExercicios);
+		
+		textField = new JTextField();
+		textField.setForeground(Color.WHITE);
+		textField.setColumns(10);
+		textField.setBackground(new Color(76, 76, 76));
+		textField.setBounds(28, 125, 180, 20);
+		contentPane.add(textField);
+		
+		JLabel lblDiaDaSemana = new JLabel("Dia da semana");
+		lblDiaDaSemana.setForeground(Color.WHITE);
+		lblDiaDaSemana.setBounds(28, 108, 101, 14);
+		contentPane.add(lblDiaDaSemana);
 	}
-
 }

@@ -3,17 +3,17 @@ package model;
 public class Alimento {
 	private long id;
 	private String nome;
-	private int calorias;
+	private double calorias;
 	private String propriedades;
 	
-	public Alimento(String nome, int calorias, String propriedades) {
+	public Alimento(String nome, double calorias, String propriedades) {
 		super();
 		this.nome = nome;
 		this.calorias = calorias;
 		this.propriedades = propriedades;
 	}
 	
-	public Alimento(long id,String nome, int calorias, String propriedades) {
+	public Alimento(long id, String nome, double calorias, String propriedades) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -34,10 +34,10 @@ public class Alimento {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public int getCalorias() {
+	public double getCalorias() {
 		return calorias;
 	}
-	public void setCalorias(int calorias) {
+	public void setCalorias(double calorias) {
 		this.calorias = calorias;
 	}
 	public String getPropriedades() {
@@ -47,5 +47,9 @@ public class Alimento {
 		this.propriedades = propriedades;
 	}
 	
+	@Override
+	public String toString() {
+		return nome;
+	}
 	
 }

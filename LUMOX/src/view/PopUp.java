@@ -6,11 +6,13 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
+import java.awt.Color;
+import javax.swing.JLabel;
+import java.awt.Font;
 
 public class PopUp extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField txtA;
 
 	/**
 	 * Launch the application.
@@ -24,17 +26,17 @@ public class PopUp extends JFrame {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(44, 44, 44));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		txtA = new JTextField();
-		txtA.setText(text);
-		txtA.setEditable(false);
-		txtA.setBounds(136, 103, 154, 46);
-		contentPane.add(txtA);
-		txtA.setColumns(10);
+		JLabel lbMsgErro = new JLabel(text);
+		lbMsgErro.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lbMsgErro.setForeground(new Color(255, 255, 255));
+		lbMsgErro.setBounds(86, 79, 264, 105);
+		contentPane.add(lbMsgErro);
 	}
 
 }

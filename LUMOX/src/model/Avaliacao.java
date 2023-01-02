@@ -12,6 +12,13 @@ public class Avaliacao {
 		this.avaliacao = avaliacao;
 	}
 	
+	public Avaliacao(long id, Atleta atleta, String avaliacao) {
+		super();
+		this.id = id;
+		this.atleta = atleta;
+		this.avaliacao = avaliacao;
+	}
+	
 	public long getId() {
 		return id;
 	}
